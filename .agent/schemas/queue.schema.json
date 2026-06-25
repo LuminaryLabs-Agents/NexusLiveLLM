@@ -1,0 +1,27 @@
+{
+  "title": "Nexus Agent Queue",
+  "type": "object",
+  "required": ["version", "goals"],
+  "properties": {
+    "version": {"type": "integer"},
+    "active_goal_id": {"type": ["string", "null"]},
+    "run_policy": {"type": "object"},
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "title"],
+        "properties": {
+          "id": {"type": "string"},
+          "status": {"type": "string", "enum": ["queued", "active", "blocked", "complete", "failed"]},
+          "priority": {"type": "integer"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "success_criteria": {"type": "array", "items": {"type": "string"}},
+          "required_tools": {"type": "array", "items": {"type": "string"}},
+          "progress": {"type": "object"}
+        }
+      }
+    }
+  }
+}
