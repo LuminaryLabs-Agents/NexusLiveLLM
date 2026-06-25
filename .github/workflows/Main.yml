@@ -1,0 +1,138 @@
+name: Main Router
+
+on:
+  workflow_dispatch:
+    inputs:
+      route:
+        description: "Which harness to run"
+        required: true
+        default: "full-pipeline"
+        type: choice
+        options:
+          - queue-builder
+          - turn-agent
+          - game-builder
+          - short-story
+          - full-pipeline
+      idea:
+        description: "Optional queue-builder idea"
+        required: false
+        default: "Build the repo into a YAML-driven LLM build harness with queue goals, deterministic tests, and a layered browser game template."
+      game_prompt:
+        description: "Optional game-builder prompt"
+        required: false
+        default: "Build a tiny polished canvas arcade game about a living language model collecting glowing tokens inside a Git repository."
+      model:
+        description: "NVIDIA-hosted model name"
+        required: false
+        default: "nvidia/nemotron-3-ultra-550b-a55b"
+  push:
+    branches:
+      - main
+    paths:
+      - ".agent/goal.md"
+      - ".agent/workflow.md"
+      - ".agent/queue.json"
+      - ".agent/tools.json"
+      - "agent_tools/**"
+      - ".github/workflows/Main.yml"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: main-router
+  cancel-in-progress: false
+
+jobs:
+  route:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Route workflows
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ROUTE: ${{ github.event.inputs.route || 'turn-agent' }}
+          IDEA: ${{ github.event.inputs.idea || 'Build the repo into a YAML-driven LLM build harness with queue goals, deterministic tests, and a layered browser game template.' }}
+          GAME_PROMPT: ${{ github.event.inputs.game_prompt || 'Build a tiny polished canvas arcade game about a living language model collecting glowing tokens inside a Git repository.' }}
+          MODEL: ${{ github.event.inputs.model || 'nvidia/nemotron-3-ultra-550b-a55b' }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          echo "# Main Router" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Route: $ROUTE" >> "$GITHUB_STEP_SUMMARY"
+          echo "Ref: $REF_NAME" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+
+          dispatch_queue_builder() {
+            echo "Dispatching Nexus Queue Builder"
+            gh workflow run Nexus-Queue-Builder.yml \
+              --ref "$REF_NAME" \
+              -f idea="$IDEA" \
+              -f model="$MODEL"
+            echo "- Dispatched Nexus Queue Builder" >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          dispatch_turn_agent() {
+            echo "Dispatching Nexus Turn Agent"
+            gh workflow run Nexus-Turn-Agent.yml \
+              --ref "$REF_NAME" \
+              -f model="$MODEL" \
+              -f max_goals_per_run="7" \
+              -f max_turns_per_goal="6" \
+              -f max_total_turns="30" \
+              -f run_prompt="Work through the queue safely until a checkpoint is reached."
+            echo "- Dispatched Nexus Turn Agent" >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          dispatch_game_builder() {
+            echo "Dispatching NVIDIA Game Builder"
+            gh workflow run nvidia-game-builder.yml \
+              --ref "$REF_NAME" \
+              -f game_prompt="$GAME_PROMPT" \
+              -f model="$MODEL"
+            echo "- Dispatched NVIDIA Game Builder" >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          dispatch_short_story() {
+            echo "Dispatching NVIDIA Short Story Writer"
+            gh workflow run nvidia-short-story.yml \
+              --ref "$REF_NAME" \
+              -f story_prompt="Write a short story about a YAML router waking up inside a repo." \
+              -f model="$MODEL"
+            echo "- Dispatched NVIDIA Short Story Writer" >> "$GITHUB_STEP_SUMMARY"
+          }
+
+          case "$ROUTE" in
+            queue-builder)
+              dispatch_queue_builder
+              ;;
+            turn-agent)
+              dispatch_turn_agent
+              ;;
+            game-builder)
+              dispatch_game_builder
+              ;;
+            short-story)
+              dispatch_short_story
+              ;;
+            full-pipeline)
+              dispatch_queue_builder
+              sleep 10
+              dispatch_turn_agent
+              sleep 10
+              dispatch_game_builder
+              ;;
+            *)
+              echo "Unknown route: $ROUTE" >&2
+              exit 1
+              ;;
+          esac
+
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Router finished dispatching. Open the Actions tab to observe child workflow logs." >> "$GITHUB_STEP_SUMMARY"
