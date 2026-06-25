@@ -21,13 +21,12 @@ concurrency:
   group: nvidia-game-builder
   cancel-in-progress: false
 
-environment:
-  name: github-pages
-  url: ${{ steps.deploy.outputs.page_url }}
-
 jobs:
   build-game:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -66,7 +65,7 @@ jobs:
           model = os.environ.get("NVIDIA_MODEL", "nvidia/nemotron-3-ultra-550b-a55b").strip()
           game_prompt = os.environ.get("GAME_PROMPT", "").strip() or "Build a tiny polished keyboard-playable browser game."
 
-          required_contract = """
+          contract = """
           Return exactly three blocks and nothing else:
 
           <index_html>
@@ -89,7 +88,7 @@ jobs:
           {game_prompt}
 
           Required output contract:
-          {required_contract}
+          {contract}
 
           Rules:
           - index_html must be a complete HTML document.
@@ -103,7 +102,6 @@ jobs:
           """.strip()
 
           client = OpenAI(base_url="https://integrate.api.nvidia.com/v1", api_key=api_key)
-
           completion = client.chat.completions.create(
               model=model,
               messages=[
@@ -155,11 +153,8 @@ jobs:
           game_url = f"{pages_root}games/{run_id}/"
 
           docs = Path("docs")
-          games_dir = docs / "games"
-          run_dir = games_dir / run_id
+          run_dir = docs / "games" / run_id
           generated_history = Path("generated") / "games" / run_id
-          docs.mkdir(parents=True, exist_ok=True)
-          games_dir.mkdir(parents=True, exist_ok=True)
           run_dir.mkdir(parents=True, exist_ok=True)
           generated_history.mkdir(parents=True, exist_ok=True)
 
@@ -172,10 +167,10 @@ jobs:
                   encoding="utf-8",
               )
 
-          meta_path = docs / "games.json"
-          if meta_path.exists():
+          manifest_path = docs / "games.json"
+          if manifest_path.exists():
               try:
-                  manifest = json.loads(meta_path.read_text(encoding="utf-8"))
+                  manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
               except json.JSONDecodeError:
                   manifest = []
           else:
@@ -190,13 +185,14 @@ jobs:
               "url": f"games/{run_id}/",
           })
           manifest = manifest[:100]
-          meta_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+          docs.mkdir(parents=True, exist_ok=True)
+          manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 
           cards = []
-          for i, item in enumerate(manifest, start=1):
+          for index, item in enumerate(manifest, start=1):
               cards.append(f'''
                 <article class="game-card">
-                  <div class="rank">#{i:02d}</div>
+                  <div class="rank">#{index:02d}</div>
                   <div class="card-main">
                     <h2>{escape(item.get("id", "untitled"))}</h2>
                     <p class="prompt">{escape(item.get("prompt", ""))}</p>
