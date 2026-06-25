@@ -1,0 +1,23 @@
+{
+  "title": "Nexus Tool Result",
+  "type": "object",
+  "required": ["ok", "tools"],
+  "properties": {
+    "ok": {"type": "boolean"},
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "ok", "summary"],
+        "properties": {
+          "id": {"type": "string"},
+          "ok": {"type": "boolean"},
+          "summary": {"type": "string"},
+          "errors": {"type": "array", "items": {"type": "string"}},
+          "warnings": {"type": "array", "items": {"type": "string"}},
+          "data": {"type": "object"}
+        }
+      }
+    }
+  }
+}
