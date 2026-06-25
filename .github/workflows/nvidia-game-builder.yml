@@ -43,7 +43,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install openai
 
-      - name: Generate strict-contract browser game
+      - name: Generate strict-contract browser game and launcher
         env:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
           GAME_PROMPT: ${{ github.event.inputs.game_prompt }}
@@ -51,7 +51,9 @@ jobs:
         run: |
           python <<'PY'
           from datetime import datetime, timezone
+          from html import escape
           from pathlib import Path
+          import json
           import os
           import re
 
@@ -95,32 +97,23 @@ jobs:
           - style_css must contain all styling.
           - game_js must contain all game logic.
           - Use Canvas 2D or plain DOM only.
-          - Include keyboard controls, visible instructions, score/state, and restart behavior.
+          - Include keyboard controls, visible instructions, score or state, and restart behavior.
           - Do not include markdown fences or explanations.
-          - Do not use remote libraries or assets.
+          - Do not use remote libraries or remote assets.
           """.strip()
 
-          client = OpenAI(
-              base_url="https://integrate.api.nvidia.com/v1",
-              api_key=api_key,
-          )
+          client = OpenAI(base_url="https://integrate.api.nvidia.com/v1", api_key=api_key)
 
           completion = client.chat.completions.create(
               model=model,
               messages=[
-                  {
-                      "role": "system",
-                      "content": "You generate static browser game files and obey exact tagged output contracts.",
-                  },
+                  {"role": "system", "content": "You generate static browser game files and obey exact tagged output contracts."},
                   {"role": "user", "content": prompt},
               ],
               temperature=0.85,
               top_p=0.95,
               max_tokens=8192,
-              extra_body={
-                  "chat_template_kwargs": {"enable_thinking": True},
-                  "reasoning_budget": 8192,
-              },
+              extra_body={"chat_template_kwargs": {"enable_thinking": True}, "reasoning_budget": 8192},
               stream=True,
           )
 
@@ -154,34 +147,128 @@ jobs:
           if len(index_html) < 200 or len(style_css) < 50 or len(game_js) < 200:
               raise SystemExit("Generated files are too small to be accepted.")
 
-          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%SZ")
+          now = datetime.now(timezone.utc)
+          stamp = now.strftime("%Y-%m-%dT%H-%M-%SZ")
           safe_model = re.sub(r"[^A-Za-z0-9_.-]+", "-", model).strip("-")
-          expected_url = "https://luminarylabs-agents.github.io/NexusLiveLLM/"
+          run_id = f"{stamp}-{safe_model}"
+          pages_root = "https://luminarylabs-agents.github.io/NexusLiveLLM/"
+          game_url = f"{pages_root}games/{run_id}/"
 
           docs = Path("docs")
-          history = Path("generated") / "games" / f"{now}-{safe_model}"
+          games_dir = docs / "games"
+          run_dir = games_dir / run_id
+          generated_history = Path("generated") / "games" / run_id
           docs.mkdir(parents=True, exist_ok=True)
-          history.mkdir(parents=True, exist_ok=True)
+          games_dir.mkdir(parents=True, exist_ok=True)
+          run_dir.mkdir(parents=True, exist_ok=True)
+          generated_history.mkdir(parents=True, exist_ok=True)
 
-          for base in (docs, history):
+          for base in (run_dir, generated_history):
               (base / "index.html").write_text(index_html + "\n", encoding="utf-8")
               (base / "style.css").write_text(style_css + "\n", encoding="utf-8")
               (base / "game.js").write_text(game_js + "\n", encoding="utf-8")
+              (base / "prompt.md").write_text(
+                  f"# Game Prompt\n\nGenerated at: `{stamp}`\n\nModel: `{model}`\n\nURL: {game_url}\n\n## Prompt\n\n{game_prompt}\n",
+                  encoding="utf-8",
+              )
 
-          (history / "prompt.md").write_text(
-              f"# Game Prompt\n\nGenerated at: `{now}`\n\nModel: `{model}`\n\n## Prompt\n\n{game_prompt}\n",
-              encoding="utf-8",
-          )
-          Path("generated").mkdir(exist_ok=True)
-          Path("generated/latest-game-url.md").write_text(f"# Latest Game URL\n\n{expected_url}\n", encoding="utf-8")
-          Path("generated/latest-game-run.md").write_text(
-              f"# Latest Game Run\n\nGenerated at: `{now}`\n\nModel: `{model}`\n\nExpected URL: {expected_url}\n\n## Prompt\n\n{game_prompt}\n",
+          meta_path = docs / "games.json"
+          if meta_path.exists():
+              try:
+                  manifest = json.loads(meta_path.read_text(encoding="utf-8"))
+              except json.JSONDecodeError:
+                  manifest = []
+          else:
+              manifest = []
+
+          manifest = [item for item in manifest if item.get("id") != run_id]
+          manifest.insert(0, {
+              "id": run_id,
+              "generated_at": stamp,
+              "model": model,
+              "prompt": game_prompt,
+              "url": f"games/{run_id}/",
+          })
+          manifest = manifest[:100]
+          meta_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+          cards = []
+          for i, item in enumerate(manifest, start=1):
+              cards.append(f'''
+                <article class="game-card">
+                  <div class="rank">#{i:02d}</div>
+                  <div class="card-main">
+                    <h2>{escape(item.get("id", "untitled"))}</h2>
+                    <p class="prompt">{escape(item.get("prompt", ""))}</p>
+                    <p class="meta">{escape(item.get("generated_at", ""))} · {escape(item.get("model", ""))}</p>
+                    <a class="play" href="{escape(item.get("url", "#"))}">Play this build</a>
+                  </div>
+                </article>
+              ''')
+
+          gallery = "\n".join(cards) or "<p>No games generated yet. Run the workflow to create the first build.</p>"
+
+          launcher_html = f'''<!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>NexusLiveLLM Game Launcher</title>
+            <link rel="stylesheet" href="./launcher.css" />
+          </head>
+          <body>
+            <main class="shell">
+              <section class="hero">
+                <p class="eyebrow">NexusLiveLLM</p>
+                <h1>Generated Game Ladder</h1>
+                <p class="lede">Every workflow run creates a new playable browser game and adds it to this ladder. The newest build stays at the top.</p>
+                <a class="primary" href="games/{run_id}/">Play latest build</a>
+              </section>
+              <section class="ladder" aria-label="Generated game ladder">
+                {gallery}
+              </section>
+            </main>
+          </body>
+          </html>
+          '''
+
+          launcher_css = '''
+          :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+          * { box-sizing: border-box; }
+          body { margin: 0; min-height: 100vh; background: radial-gradient(circle at top left, #24304d, #0b0d14 45%, #05060a); color: #f5f7fb; }
+          .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 56px 0 72px; }
+          .hero { border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06); border-radius: 28px; padding: 34px; box-shadow: 0 24px 80px rgba(0,0,0,.32); }
+          .eyebrow { margin: 0 0 8px; color: #9fb7ff; letter-spacing: .16em; text-transform: uppercase; font-size: 12px; font-weight: 800; }
+          h1 { margin: 0; font-size: clamp(38px, 7vw, 86px); line-height: .92; letter-spacing: -0.07em; }
+          .lede { max-width: 720px; color: #c8d1e8; font-size: 18px; line-height: 1.55; }
+          .primary, .play { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 800; border-radius: 999px; }
+          .primary { margin-top: 12px; padding: 13px 18px; color: #07101f; background: #d8e6ff; }
+          .ladder { display: grid; gap: 14px; margin-top: 22px; }
+          .game-card { display: grid; grid-template-columns: 82px 1fr; gap: 16px; align-items: stretch; padding: 16px; border: 1px solid rgba(255,255,255,.11); background: rgba(8,10,18,.72); border-radius: 22px; }
+          .rank { display: grid; place-items: center; border-radius: 18px; background: rgba(255,255,255,.08); color: #cfe0ff; font-size: 22px; font-weight: 900; }
+          .card-main h2 { margin: 2px 0 8px; font-size: 18px; overflow-wrap: anywhere; }
+          .prompt { margin: 0 0 10px; color: #d7def0; line-height: 1.45; }
+          .meta { margin: 0 0 12px; color: #8e9bb8; font-size: 13px; overflow-wrap: anywhere; }
+          .play { padding: 10px 14px; color: #edf4ff; background: rgba(125,157,255,.22); border: 1px solid rgba(190,207,255,.24); }
+          @media (max-width: 640px) { .game-card { grid-template-columns: 1fr; } .rank { min-height: 52px; } .hero { padding: 24px; } }
+          '''
+
+          (docs / "index.html").write_text(launcher_html, encoding="utf-8")
+          (docs / "launcher.css").write_text(launcher_css, encoding="utf-8")
+
+          latest = Path("generated")
+          latest.mkdir(exist_ok=True)
+          (latest / "latest-game-url.md").write_text(f"# Latest Game URL\n\n{game_url}\n", encoding="utf-8")
+          (latest / "latest-launcher-url.md").write_text(f"# Launcher URL\n\n{pages_root}\n", encoding="utf-8")
+          (latest / "latest-game-run.md").write_text(
+              f"# Latest Game Run\n\nGenerated at: `{stamp}`\n\nModel: `{model}`\n\nLauncher: {pages_root}\n\nGame: {game_url}\n\n## Prompt\n\n{game_prompt}\n",
               encoding="utf-8",
           )
 
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
               summary.write("# NVIDIA Game Builder\n\n")
-              summary.write(f"Expected URL after deployment: {expected_url}\n")
+              summary.write(f"Launcher URL: {pages_root}\n\n")
+              summary.write(f"Latest game URL: {game_url}\n")
           PY
 
       - name: Commit generated game files
@@ -193,7 +280,7 @@ jobs:
             echo "No generated game changes to commit."
             exit 0
           fi
-          git commit -m "chore: generate NVIDIA browser game"
+          git commit -m "chore: generate NVIDIA browser game ladder entry"
           git push
 
       - name: Configure GitHub Pages
@@ -210,4 +297,4 @@ jobs:
 
       - name: Print deployed URL
         run: |
-          echo "Game deployed to: ${{ steps.deploy.outputs.page_url }}"
+          echo "Launcher deployed to: ${{ steps.deploy.outputs.page_url }}"
