@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "tools": [
+    {
+      "id": "queue_check",
+      "type": "python",
+      "module": "agent_tools.queue_check",
+      "function": "run",
+      "required": true
+    },
+    {
+      "id": "state_check",
+      "type": "python",
+      "module": "agent_tools.state_check",
+      "function": "run",
+      "required": true
+    },
+    {
+      "id": "repo_policy_check",
+      "type": "python",
+      "module": "agent_tools.repo_policy",
+      "function": "run",
+      "required": true
+    },
+    {
+      "id": "js_syntax_check",
+      "type": "python",
+      "module": "agent_tools.js_syntax",
+      "function": "run",
+      "required": false
+    },
+    {
+      "id": "launcher_manifest_check",
+      "type": "python",
+      "module": "agent_tools.launcher_manifest",
+      "function": "run",
+      "required": false
+    },
+    {
+      "id": "html_smoke_check",
+      "type": "python",
+      "module": "agent_tools.html_smoke",
+      "function": "run",
+      "required": false
+    }
+  ]
+}
