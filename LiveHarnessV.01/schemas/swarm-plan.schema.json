@@ -1,0 +1,1 @@
+{"title":"LiveHarness Swarm Plan","type":"object","required":["schema","run_id","workers"],"properties":{"schema":{"type":"string"},"run_id":{"type":"string"},"max_workers":{"type":"integer"},"workers":{"type":"array","items":{"type":"object"}}}}
