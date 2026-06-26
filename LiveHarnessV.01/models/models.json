@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "provider": "nvidia",
+  "base_url": "https://integrate.api.nvidia.com/v1",
+  "default_tier": "process",
+  "tiers": {
+    "instant": {"model": "nvidia/nemotron-3-ultra-550b-a55b", "temperature": 0.15, "max_tokens": 1024, "fallback_tier": "answer"},
+    "answer": {"model": "nvidia/nemotron-3-ultra-550b-a55b", "temperature": 0.45, "max_tokens": 4096, "fallback_tier": "process"},
+    "process": {"model": "nvidia/nemotron-3-ultra-550b-a55b", "temperature": 0.45, "max_tokens": 8192, "fallback_tier": "thinking"},
+    "orchestrator": {"model": "nvidia/nemotron-3-ultra-550b-a55b", "temperature": 0.35, "max_tokens": 12000, "fallback_tier": "thinking"},
+    "thinking": {"model": "nvidia/nemotron-3-ultra-550b-a55b", "temperature": 0.25, "max_tokens": 16384, "fallback_tier": null},
+    "writing": {"model": "nvidia/nemotron-3-ultra-550b-a55b", "temperature": 0.8, "max_tokens": 8192, "fallback_tier": "answer"}
+  }
+}
