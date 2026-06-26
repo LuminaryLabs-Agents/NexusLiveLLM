@@ -1,0 +1,1 @@
+{"title":"LiveHarness Purge Command","type":"object","required":["command_id","game_id","action"],"properties":{"command_id":{"type":"string"},"game_id":{"type":"string"},"action":{"type":"string"},"preconditions":{"type":"object"}}}
