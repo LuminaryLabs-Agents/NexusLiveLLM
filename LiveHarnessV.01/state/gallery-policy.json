@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "max_active_games": 10,
+  "purge_mode": "hard_delete_after_capsule",
+  "protect_latest_count": 2,
+  "protect_feature_contributors": true,
+  "minimum_score_to_survive": 55,
+  "score_weights": {
+    "tools": 30,
+    "playability": 20,
+    "capability_contribution": 25,
+    "novelty": 10,
+    "debuggability": 10,
+    "size_sanity": 5
+  }
+}
