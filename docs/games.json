@@ -1,5 +1,12 @@
 [
   {
+    "id": "2026-06-26T03-30-40Z-nvidia-nemotron-3-ultra-550b-a55b",
+    "generated_at": "2026-06-26T03-30-40Z",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b",
+    "prompt": "Build a tiny polished keyboard-playable browser game about a living language model inside a GitHub Pages arcade launcher.",
+    "url": "games/2026-06-26T03-30-40Z-nvidia-nemotron-3-ultra-550b-a55b/"
+  },
+  {
     "id": "2026-06-26T02-29-10Z-nvidia-nemotron-3-ultra-550b-a55b",
     "generated_at": "2026-06-26T02-29-10Z",
     "model": "nvidia/nemotron-3-ultra-550b-a55b",
