@@ -5,8 +5,7 @@ import json
 import os
 import re
 
-from .common import harness_root, repo_root, utc_id, write_json, write_text, read_json, ledger
-from .model_router import route
+from .common import harness_root, repo_root, utc_id, write_json, write_text, ledger
 from .orchestrator_loop import run as run_orchestrator
 from .slot_loop import fill as fill_slot
 from .run_tools import run_all
@@ -16,162 +15,35 @@ from .reviewer_loop import review
 def slugify(value: str) -> str:
     value = value.lower().strip()
     value = re.sub(r"[^a-z0-9]+", "-", value)
-    return value.strip("-") or "game"
+    return value.strip("-") or "build"
 
 
-def game_js() -> str:
-    return r'''
-const HUD = document.getElementById('hud');
-const statusLine = document.getElementById('status');
-const restartButton = document.getElementById('restart');
-
-import('https://unpkg.com/three@0.160.0/build/three.module.js').then((THREE) => {
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x9fc7ff);
-  scene.fog = new THREE.Fog(0x9fc7ff, 120, 650);
-
-  const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1200);
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.shadowMap.enabled = true;
-  document.body.appendChild(renderer.domElement);
-
-  const sun = new THREE.DirectionalLight(0xffffff, 2.2);
-  sun.position.set(90, 180, 70);
-  sun.castShadow = true;
-  scene.add(sun);
-  scene.add(new THREE.HemisphereLight(0xddeeff, 0x334422, 1.2));
-
-  function heightAt(x, z) {
-    return Math.sin(x * 0.018) * 5 + Math.cos(z * 0.021) * 4 + Math.sin((x + z) * 0.009) * 3;
-  }
-
-  const terrainSize = 900;
-  const terrainSegments = 120;
-  const terrain = new THREE.PlaneGeometry(terrainSize, terrainSize, terrainSegments, terrainSegments);
-  terrain.rotateX(-Math.PI / 2);
-  const pos = terrain.attributes.position;
-  for (let i = 0; i < pos.count; i += 1) {
-    const x = pos.getX(i);
-    const z = pos.getZ(i);
-    pos.setY(i, heightAt(x, z));
-  }
-  terrain.computeVertexNormals();
-  const ground = new THREE.Mesh(terrain, new THREE.MeshStandardMaterial({ color: 0x3d7d45, roughness: 0.95, metalness: 0.02 }));
-  ground.receiveShadow = true;
-  scene.add(ground);
-
-  function makeTree(x, z) {
-    const y = heightAt(x, z);
-    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 1.0, 7, 7), new THREE.MeshStandardMaterial({ color: 0x654321 }));
-    trunk.position.set(x, y + 3.5, z);
-    const top = new THREE.Mesh(new THREE.ConeGeometry(4.5, 12, 8), new THREE.MeshStandardMaterial({ color: 0x1f5d35 }));
-    top.position.set(x, y + 12, z);
-    scene.add(trunk, top);
-  }
-
-  function makeRock(x, z) {
-    const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(2.4, 0), new THREE.MeshStandardMaterial({ color: 0x7f8790, roughness: 1 }));
-    rock.position.set(x, heightAt(x, z) + 2.1, z);
-    rock.scale.setScalar(0.7 + Math.random() * 1.2);
-    scene.add(rock);
-  }
-
-  const collectibles = [];
-  function makeCollectible(x, z) {
-    const gem = new THREE.Mesh(new THREE.IcosahedronGeometry(2.3, 1), new THREE.MeshStandardMaterial({ color: 0xffd24a, emissive: 0x6c4a00, roughness: 0.3 }));
-    gem.position.set(x, heightAt(x, z) + 5, z);
-    scene.add(gem);
-    collectibles.push(gem);
-  }
-
-  for (let i = 0; i < 120; i += 1) {
-    const x = (Math.random() - 0.5) * terrainSize * 0.9;
-    const z = (Math.random() - 0.5) * terrainSize * 0.9;
-    if (i % 3 === 0) makeRock(x, z); else makeTree(x, z);
-  }
-  for (let i = 0; i < 18; i += 1) {
-    makeCollectible((Math.random() - 0.5) * 650, (Math.random() - 0.5) * 650);
-  }
-
-  const player = new THREE.Mesh(new THREE.CapsuleGeometry(2.2, 5.5, 4, 8), new THREE.MeshStandardMaterial({ color: 0x334cff, roughness: 0.45 }));
-  player.castShadow = true;
-  scene.add(player);
-
-  const keys = new Set();
-  let score = 0;
-  let startTime = performance.now();
-  let lastTime = performance.now();
-
-  function reset() {
-    score = 0;
-    startTime = performance.now();
-    player.position.set(0, heightAt(0, 0) + 5, 0);
-    collectibles.forEach((gem) => { gem.visible = true; });
-    statusLine.textContent = 'Explore the generated world and collect the gold cores.';
-  }
-
-  window.addEventListener('keydown', (event) => keys.add(event.key.toLowerCase()));
-  window.addEventListener('keyup', (event) => keys.delete(event.key.toLowerCase()));
-  restartButton.addEventListener('click', reset);
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  function update(dt) {
-    const speed = 38;
-    let dx = 0;
-    let dz = 0;
-    if (keys.has('w') || keys.has('arrowup')) dz -= 1;
-    if (keys.has('s') || keys.has('arrowdown')) dz += 1;
-    if (keys.has('a') || keys.has('arrowleft')) dx -= 1;
-    if (keys.has('d') || keys.has('arrowright')) dx += 1;
-    const len = Math.hypot(dx, dz) || 1;
-    player.position.x += (dx / len) * speed * dt;
-    player.position.z += (dz / len) * speed * dt;
-    player.position.x = Math.max(-430, Math.min(430, player.position.x));
-    player.position.z = Math.max(-430, Math.min(430, player.position.z));
-    player.position.y = heightAt(player.position.x, player.position.z) + 5;
-
-    collectibles.forEach((gem) => {
-      gem.rotation.y += dt * 2.5;
-      gem.position.y = heightAt(gem.position.x, gem.position.z) + 5 + Math.sin(performance.now() * 0.003 + gem.position.x) * 0.8;
-      if (gem.visible && gem.position.distanceTo(player.position) < 8) {
-        gem.visible = false;
-        score += 1;
-        statusLine.textContent = score >= collectibles.length ? 'All cores collected. The world is stable.' : 'Core collected.';
-      }
-    });
-
-    const target = new THREE.Vector3(player.position.x - 28, player.position.y + 22, player.position.z + 38);
-    camera.position.lerp(target, 0.08);
-    camera.lookAt(player.position.x, player.position.y + 3, player.position.z);
-
-    const elapsed = Math.floor((performance.now() - startTime) / 1000);
-    HUD.textContent = `Cores ${score}/${collectibles.length} · Time ${elapsed}s · WASD/Arrows to move`;
-  }
-
-  function animate(now) {
-    const dt = Math.min(0.05, (now - lastTime) / 1000);
-    lastTime = now;
-    update(dt);
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-
-  reset();
-  requestAnimationFrame(animate);
-}).catch((error) => {
-  statusLine.textContent = 'Three.js failed to load: ' + error.message;
-});
-'''.strip() + "\n"
+def determine_app_type(prompt: str, mode: str) -> str:
+    low = prompt.lower()
+    if "kit builder" in low or "kitbuilder" in low or mode == "kit-builder":
+        if "three" in low and "open" in low and "kit builder" not in low:
+            return "three-open-world"
+        return "kit-builder"
+    if "three" in low or "open-world" in low or "open world" in low:
+        return "three-open-world"
+    return "kit-builder"
 
 
-def game_index(title: str) -> str:
-    return f'''<!doctype html>
+def update_manifest(repo: Path, run_id: str, title: str, prompt: str) -> None:
+    docs = repo / "docs"
+    docs.mkdir(parents=True, exist_ok=True)
+    path = docs / "games.json"
+    try:
+        manifest = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    except json.JSONDecodeError:
+        manifest = []
+    manifest = [item for item in manifest if item.get("id") != run_id]
+    manifest.insert(0, {"id": run_id, "title": title, "prompt": prompt, "url": f"games/{run_id}/", "status": "active", "visibility": "public"})
+    path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+
+def shared_index(title: str) -> str:
+    return f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -180,84 +52,114 @@ def game_index(title: str) -> str:
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <main id="overlay">
-    <h1>{title}</h1>
-    <p id="hud">Loading world...</p>
-    <p id="status">Collect the gold cores scattered across the generated terrain.</p>
-    <button id="restart" type="button">Restart</button>
-    <a href="../../index.html">Back to launcher</a>
+  <main id="app">
+    <section id="hud" aria-live="polite">
+      <h1>{title}</h1>
+      <p id="status">Loading...</p>
+      <p id="controls">WASD / arrows · click cards · inspect GameHost</p>
+      <a href="../../index.html">Back to launcher</a>
+    </section>
+    <canvas id="game" role="application"></canvas>
+    <section id="panel"></section>
   </main>
   <script src="./game.js"></script>
 </body>
 </html>
-'''
+"""
 
 
-def game_css() -> str:
-    return '''html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #0b1020; color: #f7fbff; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
-canvas { display: block; }
-#overlay { position: fixed; left: 18px; top: 18px; z-index: 5; width: min(420px, calc(100vw - 36px)); padding: 18px; border: 1px solid rgba(255,255,255,.18); border-radius: 20px; background: rgba(7, 12, 25, .72); backdrop-filter: blur(12px); box-shadow: 0 20px 80px rgba(0,0,0,.32); }
-h1 { margin: 0 0 8px; font-size: clamp(26px, 5vw, 48px); line-height: .95; letter-spacing: -.06em; }
-p { margin: 8px 0; color: #dbe7ff; line-height: 1.4; }
-button, a { display: inline-flex; margin: 8px 8px 0 0; padding: 9px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.1); color: #fff; text-decoration: none; font-weight: 800; cursor: pointer; }
-'''
+def shared_css() -> str:
+    return """html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#071017;color:#eef8ff;font-family:Inter,ui-sans-serif,system-ui,sans-serif}#app,#game{position:fixed;inset:0}#game{width:100vw;height:100vh;display:block}#hud{position:fixed;left:16px;top:16px;z-index:3;width:min(420px,calc(100vw - 32px));padding:16px;border:1px solid rgba(150,255,186,.24);border-radius:18px;background:rgba(4,10,18,.72);backdrop-filter:blur(10px)}#hud h1{margin:0 0 6px;font-size:clamp(24px,4vw,42px);letter-spacing:-.05em}#hud p{margin:6px 0;color:#cbd9e8}#hud a{display:inline-flex;margin-top:8px;color:#bfffd2;text-decoration:none;font-weight:900}#panel{position:fixed;right:16px;bottom:16px;z-index:2;display:grid;gap:8px;width:min(460px,calc(100vw - 32px))}.card,.action{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.08);border-radius:14px;padding:10px}.action{display:inline-flex;margin:4px;cursor:pointer}.active{outline:2px solid #bfffd2}pre{white-space:pre-wrap;max-height:220px;overflow:auto}button{border:0;border-radius:999px;padding:8px 12px;background:#bfffd2;color:#06110b;font-weight:900}canvas{touch-action:none}"""
 
 
-def update_launcher(repo: Path, run_id: str, title: str, prompt: str) -> None:
-    docs = repo / "docs"
-    docs.mkdir(exist_ok=True)
-    manifest_path = docs / "games.json"
-    if manifest_path.exists():
-        try:
-            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        except json.JSONDecodeError:
-            manifest = []
-    else:
-        manifest = []
-    manifest = [item for item in manifest if item.get("id") != run_id]
-    manifest.insert(0, {"id": run_id, "title": title, "prompt": prompt, "url": f"games/{run_id}/"})
-    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+def kit_builder_js(prompt: str) -> str:
+    data = {
+        "kits": [
+            {"id": "interaction-domain-service-kit", "status": "candidate", "owns": ["verbs", "affordances", "validation"]},
+            {"id": "movement-control-kit", "status": "candidate", "owns": ["input intent", "movement mode", "camera descriptors"]},
+            {"id": "save-snapshot-kit", "status": "candidate", "owns": ["archive index", "replay trace", "state capsules"]},
+            {"id": "gallery-curation-kit", "status": "active", "owns": ["score", "fate", "max 10 builds"]}
+        ],
+        "actions": ["CONTINUE", "SHOW_ADVANCED", "ASK_ORCHESTRATOR", "ASK_SLOT", "RECONCILE", "STOP"],
+        "prompt": prompt,
+    }
+    return "const KIT_DATA = " + json.dumps(data) + r''';
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const panel = document.getElementById('panel');
+const statusLine = document.getElementById('status');
+let selected = 0;
+let frame = 0;
+function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+addEventListener('resize',resize);resize();
+function renderPanel(){const kit=KIT_DATA.kits[selected];panel.innerHTML=`<article class="card"><h2>${kit.id}</h2><p>Status: ${kit.status}</p><p>Owns: ${kit.owns.join(', ')}</p><pre>${JSON.stringify({kit,actions:KIT_DATA.actions},null,2)}</pre></article><article class="card"><h3>Bounded actions</h3>${KIT_DATA.actions.map(a=>`<button class="action" data-action="${a}">${a}</button>`).join('')}</article>`;panel.querySelectorAll('button').forEach(btn=>btn.onclick=()=>{statusLine.textContent=`${btn.dataset.action} selected for ${kit.id}`})}
+function draw(){frame++;ctx.clearRect(0,0,innerWidth,innerHeight);const t=performance.now()*0.001;ctx.fillStyle='#071017';ctx.fillRect(0,0,innerWidth,innerHeight);KIT_DATA.kits.forEach((kit,i)=>{const x=innerWidth/2+Math.cos(t+i*1.7)*220;const y=innerHeight/2+Math.sin(t*.8+i*1.3)*150;ctx.beginPath();ctx.arc(x,y,54+i*4,0,Math.PI*2);ctx.fillStyle=i===selected?'rgba(191,255,210,.38)':'rgba(92,153,255,.22)';ctx.fill();ctx.strokeStyle=i===selected?'#bfffd2':'rgba(255,255,255,.34)';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#eef8ff';ctx.textAlign='center';ctx.font='700 13px system-ui';ctx.fillText(kit.id.replaceAll('-', ' '),x,y)});requestAnimationFrame(draw)}
+canvas.addEventListener('click',()=>{selected=(selected+1)%KIT_DATA.kits.length;renderPanel()});
+window.GameHost={getState:()=>({frame,selected:KIT_DATA.kits[selected],all:KIT_DATA}),select:(i)=>{selected=i%KIT_DATA.kits.length;renderPanel()}};
+statusLine.textContent='Kit Builder dashboard ready. Click the canvas to cycle domain kits.';renderPanel();draw();
+'''.strip() + "\n"
 
-    cards = []
-    for index, item in enumerate(manifest, start=1):
-        cards.append(f'<article class="game-card"><div class="rank">#{index:02d}</div><div><h2>{item.get("title", item.get("id"))}</h2><p>{item.get("prompt", "")}</p><a class="play" href="{item.get("url")}">Play this build</a></div></article>')
-    launcher = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>NexusLiveLLM Launcher</title><link rel="stylesheet" href="./launcher.css"></head><body><main class="shell"><section class="hero"><p class="eyebrow">NexusLiveLLM</p><h1>Generated Game Ladder</h1><p class="lede">LiveHarnessV.01 generated games. Newest builds appear first.</p><a class="primary" href="games/' + run_id + '/">Play latest build</a></section><section class="ladder">' + ''.join(cards) + '</section></main></body></html>'
-    (docs / "index.html").write_text(launcher + "\n", encoding="utf-8")
-    if not (docs / "launcher.css").exists():
-        (docs / "launcher.css").write_text(':root{color-scheme:dark;font-family:system-ui,sans-serif}body{margin:0;background:#080b14;color:#eef3ff}.shell{width:min(1100px,calc(100% - 32px));margin:auto;padding:48px 0}.hero,.game-card{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:24px;padding:24px;margin:14px 0}.eyebrow{color:#9fb7ff;text-transform:uppercase;font-weight:900;letter-spacing:.16em}.primary,.play{display:inline-flex;padding:10px 14px;border-radius:999px;background:#dce8ff;color:#07101f;text-decoration:none;font-weight:900}.game-card{display:grid;grid-template-columns:70px 1fr;gap:16px}.rank{font-size:24px;font-weight:900}\n', encoding="utf-8")
+
+def three_world_js() -> str:
+    return r'''
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const statusLine = document.getElementById('status');
+let player = { x: 0, y: 0, vx: 0, vy: 0 };
+let frame = 0;
+let score = 0;
+const keys = new Set();
+const seedPoints = Array.from({ length: 90 }, (_, i) => ({ x: Math.sin(i * 91.7) * 820, y: Math.cos(i * 41.1) * 820, type: i % 7 === 0 ? 'core' : i % 3 === 0 ? 'rock' : 'tree', got: false }));
+function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+addEventListener('resize',resize);resize();
+addEventListener('keydown',e=>keys.add(e.key.toLowerCase()));addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));addEventListener('blur',()=>keys.clear());
+function heightAt(x,y){return Math.sin(x*.01)*20+Math.cos(y*.012)*18+Math.sin((x+y)*.006)*12}
+function update(){frame++;const ax=(keys.has('d')||keys.has('arrowright'))-(keys.has('a')||keys.has('arrowleft'));const ay=(keys.has('s')||keys.has('arrowdown'))-(keys.has('w')||keys.has('arrowup'));player.vx=player.vx*.88+ax*.9;player.vy=player.vy*.88+ay*.9;player.x+=player.vx;player.y+=player.vy;seedPoints.forEach(p=>{if(p.type==='core'&&!p.got&&Math.hypot(p.x-player.x,p.y-player.y)<28){p.got=true;score++}});statusLine.textContent=`Cores ${score}/${seedPoints.filter(p=>p.type==='core').length} · Height ${heightAt(player.x,player.y).toFixed(1)} · GameHost ready`}
+function draw(){update();ctx.fillStyle='#071017';ctx.fillRect(0,0,innerWidth,innerHeight);const cx=innerWidth/2,cy=innerHeight/2;for(let gx=-10;gx<=10;gx++){for(let gy=-8;gy<=8;gy++){const wx=player.x+gx*70,wy=player.y+gy*70;const h=heightAt(wx,wy);ctx.fillStyle=`hsl(${120+h},38%,${26+h*.25}%)`;ctx.fillRect(cx+gx*70-player.x%70,cy+gy*70-player.y%70,72,72)}}seedPoints.forEach(p=>{const sx=cx+p.x-player.x,sy=cy+p.y-player.y;if(sx<-80||sy<-80||sx>innerWidth+80||sy>innerHeight+80)return;ctx.beginPath();ctx.arc(sx,sy,p.type==='core'?9:14,0,Math.PI*2);ctx.fillStyle=p.got?'rgba(255,255,255,.12)':p.type==='core'?'#ffd24a':p.type==='rock'?'#8a93a4':'#2f8f4d';ctx.fill()});ctx.beginPath();ctx.arc(cx,cy,16,0,Math.PI*2);ctx.fillStyle='#82a7ff';ctx.fill();requestAnimationFrame(draw)}
+window.GameHost={getState:()=>({frame,player,score,points:seedPoints}),heightAt,restart:()=>{player={x:0,y:0,vx:0,vy:0};score=0;seedPoints.forEach(p=>p.got=false)}};draw();
+'''.strip() + "\n"
+
+
+def write_game(repo: Path, run_id: str, title: str, prompt: str, app_type: str) -> Path:
+    game_dir = repo / "docs" / "games" / run_id
+    write_text(game_dir / "index.html", shared_index(title))
+    write_text(game_dir / "style.css", shared_css())
+    write_text(game_dir / "game.js", kit_builder_js(prompt) if app_type == "kit-builder" else three_world_js())
+    write_text(game_dir / "README.md", f"# {title}\n\nGenerated by LiveHarnessV.01.\n\nType: `{app_type}`\n")
+    update_manifest(repo, run_id, title, prompt)
+    return game_dir
 
 
 def main() -> None:
     harness = harness_root()
     repo = repo_root()
-    prompt = os.environ.get("GAME_PROMPT", "Build a Three.js open-world exploration game.")
-    run_stamp = utc_id()
-    run_id = run_stamp + "-three-open-world"
-    run_dir = harness / "runs" / run_stamp
-    title = "Ledgerwood: Three.js Open World"
+    prompt = os.environ.get("GAME_PROMPT", "Build a Kit Builder app.")
+    mode = os.environ.get("LIVEHARNESS_MODE", "kit-builder")
+    run_stamp = os.environ.get("LIVEHARNESS_RUN_ID") or utc_id()
+    run_dir_env = os.environ.get("LIVEHARNESS_RUN_DIR")
+    run_dir = Path(run_dir_env) if run_dir_env else harness / "runs" / run_stamp
+    if not run_dir.is_absolute():
+        run_dir = harness / run_dir
+    app_type = determine_app_type(prompt, mode)
+    run_id = slugify(run_stamp) + "-" + app_type
+    title = "LiveHarness Kit Builder" if app_type == "kit-builder" else "Ledgerwood Open World"
 
-    write_json(run_dir / "run-summary.json", {"run_id": run_id, "prompt": prompt, "harness": "LiveHarnessV.01"})
-    run_orchestrator(run_dir, "root-orchestrator", "whole Three.js open-world game", ["runtime", "world", "player", "gameplay", "visuals", "tests"])
+    write_json(run_dir / "run-summary.json", {"run_id": run_id, "prompt": prompt, "harness": "LiveHarnessV.01", "mode": mode, "app_type": app_type})
+    run_orchestrator(run_dir, "root-orchestrator", f"{app_type} app", ["runtime", "world", "player", "gameplay", "visuals", "tests"])
     for name in ["runtime", "world", "player", "gameplay", "visuals", "tests"]:
         run_orchestrator(run_dir, name + "-orchestrator", name + " domain", [])
-    fill_slot(run_dir, "terrain-height-function", "js_function", {"function": "heightAt(x,z)", "contract": "returns terrain height in world units"})
-    fill_slot(run_dir, "player-controller", "js_system", {"controls": "WASD and arrow keys", "depends_on": "heightAt"})
+    fill_slot(run_dir, "action-menu", "ui_contract", {"actions": ["CONTINUE", "SHOW_ADVANCED", "ASK_ORCHESTRATOR", "ASK_SLOT", "RECONCILE", "STOP"]})
+    fill_slot(run_dir, "debug-host", "state_contract", {"global": "window.GameHost", "method": "getState"})
     fill_slot(run_dir, "launcher-card", "copy", {"title": title, "url": f"games/{run_id}/"})
 
-    game_dir = repo / "docs" / "games" / run_id
-    write_text(game_dir / "index.html", game_index(title))
-    write_text(game_dir / "style.css", game_css())
-    write_text(game_dir / "game.js", game_js())
-    write_text(game_dir / "README.md", "# " + title + "\n\nGenerated by LiveHarnessV.01 rapid-game bootstrap path.\n")
-    update_launcher(repo, run_id, title, prompt)
-
+    game_dir = write_game(repo, run_id, title, prompt, app_type)
     applied = {"files": [str(game_dir / name) for name in ["index.html", "style.css", "game.js", "README.md"]], "manifest": "docs/games.json"}
     write_json(run_dir / "reconcile" / "applied-files.json", applied)
-    ledger("action-ledger.jsonl", {"time": utc_id(), "move": "WRITE_FINAL_FILES", "run_id": run_id})
+    ledger("action-ledger.jsonl", {"time": utc_id(), "move": "WRITE_FINAL_FILES", "run_id": run_id, "app_type": app_type})
     tools = run_all()
     write_json(run_dir / "tools" / "final-tool-results.json", tools)
     review(run_dir, tools)
-    write_json(harness / "state" / "latest.json", {"run_id": run_id, "url": f"docs/games/{run_id}/", "tools_ok": tools.get("ok")})
+    write_json(harness / "state" / "latest.json", {"run_id": run_id, "url": f"docs/games/{run_id}/", "tools_ok": tools.get("ok"), "app_type": app_type})
 
 
 if __name__ == "__main__":
