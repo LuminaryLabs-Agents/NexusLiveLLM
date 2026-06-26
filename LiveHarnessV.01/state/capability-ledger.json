@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "capabilities": [
+    {
+      "id": "launcher.manifest.update",
+      "status": "stable",
+      "introduced_by": "bootstrap",
+      "evidence": ["docs/games.json is the launcher source of truth"]
+    },
+    {
+      "id": "bounded.action.panel",
+      "status": "candidate",
+      "introduced_by": "002-kit-builder",
+      "actions": ["CONTINUE", "SHOW_ADVANCED", "ASK_ORCHESTRATOR", "ASK_SLOT", "RECONCILE", "STOP"]
+    }
+  ]
+}
