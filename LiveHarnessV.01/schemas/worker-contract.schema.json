@@ -1,0 +1,1 @@
+{"title":"LiveHarness Worker Contract","type":"object","required":["worker_id","slot_id","task","must_return"],"properties":{"worker_id":{"type":"string"},"slot_id":{"type":"string"},"goal_ast_node":{"type":"string"},"task":{"type":"string"},"must_return":{"type":"object"},"critical":{"type":"boolean"}}}
