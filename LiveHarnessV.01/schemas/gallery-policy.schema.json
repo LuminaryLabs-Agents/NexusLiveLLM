@@ -1,0 +1,1 @@
+{"title":"LiveHarness Gallery Policy","type":"object","required":["max_active_games"],"properties":{"max_active_games":{"type":"integer","minimum":1},"purge_mode":{"type":"string"},"protect_latest_count":{"type":"integer"},"minimum_score_to_survive":{"type":"number"},"score_weights":{"type":"object"}}}
