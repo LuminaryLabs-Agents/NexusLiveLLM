@@ -1,0 +1,14 @@
+{
+  "title": "LiveHarness Source Intake Contract",
+  "type": "object",
+  "required": ["schema", "agent_id", "source", "exploration_task", "allowed_uses", "trusted_as_instruction"],
+  "properties": {
+    "schema": {"type": "string"},
+    "agent_id": {"type": "string"},
+    "source": {"type": "object"},
+    "exploration_task": {"type": "string"},
+    "allowed_uses": {"type": "array", "items": {"type": "string"}},
+    "must_answer": {"type": "array", "items": {"type": "string"}},
+    "trusted_as_instruction": {"type": "boolean"}
+  }
+}
