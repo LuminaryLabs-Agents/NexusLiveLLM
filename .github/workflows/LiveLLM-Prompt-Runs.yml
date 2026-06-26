@@ -1,0 +1,153 @@
+name: LiveLLM Prompt Runs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "LiveHarnessV.01/prompt-inbox/**"
+      - ".github/workflows/LiveLLM-Prompt-Runs.yml"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: livellm-prompt-runs
+  cancel-in-progress: false
+
+jobs:
+  prompt-runs:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run all prompt files with full logging
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p LiveHarnessV.01/runs
+          echo "# LiveHarness Prompt Runs" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+
+          mapfile -t PROMPTS < <(find LiveHarnessV.01/prompt-inbox -name "*.md" -type f | sort)
+          if [ "${#PROMPTS[@]}" -eq 0 ]; then
+            echo "No prompt files found." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          OVERALL=0
+          for PROMPT_FILE in "${PROMPTS[@]}"; do
+            BASENAME="$(basename "$PROMPT_FILE" .md)"
+            STAMP="$(date -u +%Y-%m-%dT%H-%M-%SZ)"
+            RUN_ID="$STAMP-$BASENAME"
+            RUN_DIR="LiveHarnessV.01/runs/$RUN_ID"
+            mkdir -p "$RUN_DIR/input" "$RUN_DIR/logs" "$RUN_DIR/status" "$RUN_DIR/tools" "$RUN_DIR/review"
+
+            cp "$PROMPT_FILE" "$RUN_DIR/input/prompt.md"
+            printf '%s\n' "$PROMPT_FILE" > "$RUN_DIR/input/prompt-path.txt"
+            cat > "$RUN_DIR/input/trigger.json" <<JSON
+          {"event":"${{ github.event_name }}","ref":"${{ github.ref }}","sha":"${{ github.sha }}","workflow":"LiveLLM Prompt Runs","run_id":"${{ github.run_id }}","prompt_file":"$PROMPT_FILE"}
+          JSON
+            env | sort > "$RUN_DIR/logs/env.txt"
+            PROMPT_TEXT="$(cat "$PROMPT_FILE")"
+
+            echo "## Prompt: $BASENAME" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Run ID: \`$RUN_ID\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Prompt file: \`$PROMPT_FILE\`" >> "$GITHUB_STEP_SUMMARY"
+
+            set +e
+            (cd LiveHarnessV.01 && LIVEHARNESS_RUN_ID="$RUN_ID" LIVEHARNESS_RUN_DIR="runs/$RUN_ID" GAME_PROMPT="$PROMPT_TEXT" PYTHONPATH=tools python -m live_harness.orchestration_runner) > "$RUN_DIR/logs/orchestration.stdout.log" 2> "$RUN_DIR/logs/orchestration.stderr.log"
+            HARNESS_EXIT=$?
+            set -e
+
+            set +e
+            (cd LiveHarnessV.01 && PYTHONPATH=tools python -m live_harness.run_tools --output "runs/$RUN_ID/tools/final-tool-results.json") > "$RUN_DIR/logs/tools.stdout.log" 2> "$RUN_DIR/logs/tools.stderr.log"
+            TOOLS_EXIT=$?
+            set -e
+
+            OVERALL_OK=false
+            if [ "$HARNESS_EXIT" -eq 0 ] && [ "$TOOLS_EXIT" -eq 0 ]; then
+              OVERALL_OK=true
+            else
+              OVERALL=1
+            fi
+
+            cat > "$RUN_DIR/status/exit-codes.json" <<JSON
+          {"harness_exit":$HARNESS_EXIT,"tools_exit":$TOOLS_EXIT,"overall_ok":$OVERALL_OK}
+          JSON
+
+            if [ "$OVERALL_OK" = true ]; then
+              cat > "$RUN_DIR/status/success.json" <<JSON
+          {"status":"success","run_id":"$RUN_ID"}
+          JSON
+            else
+              cat > "$RUN_DIR/status/failure.json" <<JSON
+          {"status":"failure","run_id":"$RUN_ID","harness_exit":$HARNESS_EXIT,"tools_exit":$TOOLS_EXIT}
+          JSON
+            fi
+
+            cat > "$RUN_DIR/logs/workflow-summary.md" <<MD
+          # LiveHarness Prompt Run
+
+          - Prompt: $PROMPT_FILE
+          - Run ID: $RUN_ID
+          - Harness exit: $HARNESS_EXIT
+          - Tools exit: $TOOLS_EXIT
+          - Overall OK: $OVERALL_OK
+          MD
+
+            echo "- Harness exit: \`$HARNESS_EXIT\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Tools exit: \`$TOOLS_EXIT\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Logs: \`$RUN_DIR/logs/\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+          done
+
+          echo "$OVERALL" > LiveHarnessV.01/runs/.prompt-runs-overall-exit
+          exit 0
+
+      - name: Commit prompt run artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "livellm-prompt-runs"
+          git config user.email "livellm-prompt-runs@users.noreply.github.com"
+          git add LiveHarnessV.01/runs/ LiveHarnessV.01/ledgers/ LiveHarnessV.01/state/ docs/ generated/ src/
+          if git diff --cached --quiet; then
+            echo "No prompt run artifacts to commit."
+            exit 0
+          fi
+          git commit -m "chore: record LiveHarness prompt run artifacts"
+          git push
+
+      - name: Configure GitHub Pages
+        if: always()
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        id: deploy
+        uses: actions/deploy-pages@v4
