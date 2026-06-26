@@ -1,0 +1,1 @@
+{"title":"LiveHarness Feed Forward Artifact","type":"object","required":["agent_id","summary"],"properties":{"agent_id":{"type":"string"},"summary":{"type":"string"},"evidence":{"type":"array","items":{"type":"string"}},"artifact":{"type":"object"},"next_inputs":{"type":"array","items":{"type":"string"}}}}
