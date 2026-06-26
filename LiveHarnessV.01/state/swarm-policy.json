@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "enabled": true,
+  "max_workers": 16,
+  "max_parallel_model_calls": 16,
+  "fallback_parallelism": [8, 4, 2],
+  "timeout_seconds": 180,
+  "retries_per_slot": 2,
+  "max_build_loops": 4,
+  "max_total_model_calls": 80,
+  "require_schema_valid": true,
+  "write_raw_responses": true,
+  "write_validated_json": true,
+  "single_commit_policy": true,
+  "use_model_swarm_env": "LIVEHARNESS_USE_MODEL_SWARM",
+  "model_env": "NVIDIA_MODEL",
+  "api_key_env": "NVIDIA_API_KEY"
+}
