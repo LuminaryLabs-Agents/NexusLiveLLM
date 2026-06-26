@@ -4,8 +4,9 @@ import argparse
 import os
 from pathlib import Path
 
-from .common import harness_root, read_json, write_json, ledger, utc_id
+from .common import harness_root, write_json, ledger, utc_id
 from . import repo_context, context_injector, game_catalog, game_scorer, learning_compressor, capability_tracker, purge_agent, apply_purge, launcher_renderer
+from .run_tools import run_all
 
 
 def run(run_dir: Path, prompt: str) -> dict:
@@ -13,6 +14,7 @@ def run(run_dir: Path, prompt: str) -> dict:
     (run_dir / "context").mkdir(exist_ok=True)
     (run_dir / "learning").mkdir(exist_ok=True)
     (run_dir / "purge").mkdir(exist_ok=True)
+    (run_dir / "tools").mkdir(exist_ok=True)
     context = repo_context.collect(run_dir, prompt)
     injections = context_injector.inject_from_run(run_dir)
     entries = game_catalog.scan()
@@ -22,12 +24,13 @@ def run(run_dir: Path, prompt: str) -> dict:
     caps_state = capability_tracker.update(capsules, run_dir)
     plan = purge_agent.plan(scored, run_dir)
     result = apply_purge.apply(plan, scored, run_dir)
-    # Re-scan after manifest changes and render the public launcher.
     entries2 = game_catalog.scan()
     scored2 = game_scorer.score_all(entries2)
     launcher_renderer.render(scored2, plan, run_dir)
+    final_tools = run_all()
+    write_json(run_dir / "tools" / "post-run-tool-results.json", final_tools)
     summary = {
-        "ok": True,
+        "ok": bool(final_tools.get("ok")),
         "run_dir": str(run_dir),
         "context_capsules": len(context.get("capsules", [])),
         "injections": len(injections.get("active_injections", [])),
@@ -36,6 +39,7 @@ def run(run_dir: Path, prompt: str) -> dict:
         "capabilities": len(caps_state.get("capabilities", [])),
         "purge_decisions": len(plan.get("decisions", [])),
         "hidden_game_ids": result.get("hidden_game_ids", []),
+        "post_run_tools_ok": bool(final_tools.get("ok")),
     }
     write_json(run_dir / "post-run-summary.json", summary)
     ledger("project-ledger.jsonl", {"time": utc_id(), "event": "post_run.completed", **summary})
