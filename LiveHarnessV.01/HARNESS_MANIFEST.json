@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "harness_root": "LiveHarnessV.01",
+  "principle": "LEDGER",
+  "routes": ["queue-builder", "turn-agent", "rapid-game", "test-only", "review", "harness-upgrade-proposal"],
+  "allowed_write_roots": ["LiveHarnessV.01/", "docs/", "src/", "generated/"],
+  "blocked_write_roots": [".github/workflows/"]
+}
