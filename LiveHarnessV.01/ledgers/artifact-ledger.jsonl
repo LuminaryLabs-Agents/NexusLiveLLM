@@ -1,1 +1,4 @@
 {"event":"initialized","ledger":"artifact","harness":"LiveHarnessV.01"}
+{"time": "2026-06-26T09-32-19Z", "event": "write_set.reconciled", "candidate_id": "2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "files": 22}
+{"time": "2026-06-26T09-32-19Z", "event": "write_set.applied_to_sandbox", "candidate_id": "2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "files": 22, "rejected": []}
+{"time": "2026-06-26T09-32-20Z", "event": "candidate.promoted", "candidate_id": "2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "public_path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "manifest_entries": 1, "promoted_at": "2026-06-26T09-32-20Z"}

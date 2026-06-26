@@ -1,0 +1,147 @@
+{
+  "schema": "liveharness.reconciled-write-set.v1",
+  "write_set_id": "write-set:2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
+  "candidate_id": "2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
+  "summary": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+  "title": "Massive Voxel DSK Loop Lab",
+  "files": [
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/package.json",
+      "kind": "module_config",
+      "content": "{\"type\":\"module\",\"private\":true}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/index.html",
+      "kind": "html",
+      "content": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <title>Massive Voxel DSK Loop Lab</title>\n  <link rel=\"stylesheet\" href=\"./style.css\" />\n</head>\n<body>\n  <main id=\"app\">\n    <canvas id=\"game\" role=\"application\" aria-label=\"Voxel DSK experiment\"></canvas>\n    <aside id=\"hud\" aria-label=\"Game HUD\">\n      <header id=\"status\" aria-live=\"polite\">Loading voxel domains...</header>\n      <footer id=\"controls\">WASD move \u00b7 arrows turn \u00b7 1-5 select \u00b7 click remove \u00b7 right-click place</footer>\n    </aside>\n    <section id=\"errorPanel\" role=\"alert\" hidden></section>\n  </main>\n  <script type=\"module\" src=\"./src/main.js\"></script>\n</body>\n</html>\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/style.css",
+      "kind": "css",
+      "content": "html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08131d;color:#f2fbff;font-family:system-ui,sans-serif}#app,#game{position:fixed;inset:0}#game{width:100vw;height:100vh;display:block}#hud{position:fixed;inset:16px auto auto 16px;z-index:2;max-width:min(460px,calc(100vw - 32px));display:grid;gap:8px;pointer-events:none}#status,#controls{padding:10px 12px;border:1px solid rgba(178,255,209,.24);border-radius:14px;background:rgba(3,12,20,.72);backdrop-filter:blur(10px);box-shadow:0 16px 50px rgba(0,0,0,.22)}#status{font-weight:800;color:#c9ffd8}#controls{color:#d9e9f8;font-size:13px}#errorPanel{position:fixed;left:16px;right:16px;bottom:16px;z-index:4;padding:14px;border-radius:14px;background:#3b1010;color:#fff;white-space:pre-wrap}#errorPanel[hidden]{display:none}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/README.md",
+      "kind": "readme",
+      "content": "# Massive Voxel DSK Loop Lab\n\nBuild a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.\n\nThis candidate is generated through the massive sandbox-first LiveHarness build loop. The public game demonstrates Runtime/Kits/Sequences boundaries using a voxel experiment:\n\n- Runtime modules own command queues, events, and clock.\n- Domain modules own movement, inventory, build/break, and objective meaning.\n- Renderer modules present block state with Three.js.\n- Host modules map input into domain requests and expose `window.GameHost.getState()`.\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/data/blocks.js",
+      "kind": "source",
+      "content": "export const BLOCK_TYPES = {\n  air: { id: 0, name: \"air\", color: 0x000000 },\n  grass: { id: 1, name: \"grass\", color: 0x4faf65 },\n  dirt: { id: 2, name: \"dirt\", color: 0x8a5a35 },\n  stone: { id: 3, name: \"stone\", color: 0x8a93a3 },\n  wood: { id: 4, name: \"wood\", color: 0x8b5a2b },\n  glass: { id: 5, name: \"glass\", color: 0x84d8ff }\n};\nexport const BLOCK_BY_ID = Object.fromEntries(Object.values(BLOCK_TYPES).map((block) => [block.id, block]));\nexport const PLACEABLE_BLOCKS = Object.values(BLOCK_TYPES).filter((block) => block.id !== 0);\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/runtime/commandQueue.js",
+      "kind": "source",
+      "content": "export function createCommandQueue() {\n  const queue = [];\n  const appliedCommandIds = new Set();\n  return {\n    push(command) { queue.push({ ...command }); return command; },\n    drain(type) { const picked = queue.filter((command) => command.type === type); for (const command of picked) queue.splice(queue.indexOf(command), 1); return picked; },\n    markApplied(commandId) { if (appliedCommandIds.has(commandId)) return false; appliedCommandIds.add(commandId); return true; },\n    hasApplied(commandId) { return appliedCommandIds.has(commandId); },\n    getState() { return { pending: queue.slice(), appliedCommandIds: Array.from(appliedCommandIds).slice(-24) }; }\n  };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/runtime/eventBus.js",
+      "kind": "source",
+      "content": "export function createEventBus() {\n  const events = [];\n  return {\n    emit(type, payload = {}) { const event = { type, payload, eventId: `${type}:${events.length}:${payload.commandId ?? \"event\"}` }; events.push(event); return event; },\n    read(type) { return events.filter((event) => event.type === type); },\n    readAll() { return events.slice(); },\n    recent(limit = 24) { return events.slice(-limit); },\n    clear() { events.length = 0; }\n  };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/runtime/clock.js",
+      "kind": "source",
+      "content": "export function createClock() {\n  let frame = 0;\n  let elapsed = 0;\n  return {\n    tick(dt) { const safeDt = Math.max(0, Math.min(1 / 30, Number(dt) || 1 / 60)); frame += 1; elapsed += safeDt; return { frame, dt: safeDt, elapsed }; },\n    getState() { return { frame, elapsed }; }\n  };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/world/blockStore.js",
+      "kind": "source",
+      "content": "export function createBlockStore() {\n  const blocks = new Map();\n  const key = (x, y, z) => `${x},${y},${z}`;\n  return {\n    key,\n    setBlock(x, y, z, blockId) { const k = key(x, y, z); if (blockId) blocks.set(k, { x, y, z, blockId }); else blocks.delete(k); },\n    getBlock(x, y, z) { return blocks.get(key(x, y, z)) ?? { x, y, z, blockId: 0 }; },\n    entries() { return Array.from(blocks.values()); },\n    count() { return blocks.size; },\n    getState() { return { count: blocks.size, sample: Array.from(blocks.values()).slice(0, 12) }; }\n  };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/world/terrain.js",
+      "kind": "source",
+      "content": "export function terrainHeight(x, z) { return 2 + Math.floor(Math.sin(x * 0.28) * 1.5 + Math.cos(z * 0.22) * 1.4); }\nexport function biomeAt(x, z) { if (x < -8) return \"moss\"; if (z > 8) return \"glass-ridge\"; return \"stonefield\"; }\nexport function generateInitialWorld(blockStore) {\n  for (let x = -18; x <= 18; x += 1) {\n    for (let z = -18; z <= 18; z += 1) {\n      const h = terrainHeight(x, z);\n      for (let y = 0; y <= h; y += 1) blockStore.setBlock(x, y, z, y === h ? 1 : y > h - 2 ? 2 : 3);\n      if ((x * 31 + z * 17) % 41 === 0) for (let y = h + 1; y <= h + 3; y += 1) blockStore.setBlock(x, y, z, 4);\n    }\n  }\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/domains/inventoryDomain.js",
+      "kind": "source",
+      "content": "import { PLACEABLE_BLOCKS } from \"../data/blocks.js\";\nexport function createInventoryDomain({ events }) {\n  const state = { selectedBlockId: PLACEABLE_BLOCKS[0].id, palette: PLACEABLE_BLOCKS, ledger: [] };\n  return {\n    select(blockId, commandId = `inventory.select:${blockId}`) { const found = state.palette.find((block) => block.id === Number(blockId)); if (!found) { events.emit(\"inventory.command.rejected\", { commandId, reason: \"unknown block\" }); return state; } state.selectedBlockId = found.id; state.ledger.push(commandId); events.emit(\"inventory.selected\", { commandId, blockId: found.id }); return state; },\n    getSelectedBlock() { return state.selectedBlockId; },\n    getState() { return { ...state, ledger: state.ledger.slice(-12) }; }\n  };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/domains/buildBreakDomain.js",
+      "kind": "source",
+      "content": "export function createBuildBreakDomain({ blockStore, inventory, events, commandQueue }) {\n  const domainTrace = [];\n  function record(event) { domainTrace.push(event); if (domainTrace.length > 32) domainTrace.shift(); }\n  function accept(command) {\n    if (!command.commandId || !commandQueue.markApplied(command.commandId)) return { ok: false, duplicate: true };\n    if (Math.abs(command.x) > 24 || Math.abs(command.z) > 24 || command.y < 0 || command.y > 16) { const rejected = events.emit(\"build.command.rejected\", { commandId: command.commandId, reason: \"outside world\" }); record(rejected); return { ok: false, rejected }; }\n    if (command.type === \"build.place.request\") { blockStore.setBlock(command.x, command.y, command.z, command.blockId ?? inventory.getSelectedBlock()); const event = events.emit(\"build.block.placed\", { commandId: command.commandId, x: command.x, y: command.y, z: command.z, blockId: command.blockId ?? inventory.getSelectedBlock() }); record(event); return { ok: true, event }; }\n    if (command.type === \"block.break.request\") { blockStore.setBlock(command.x, command.y, command.z, 0); const event = events.emit(\"build.block.removed\", { commandId: command.commandId, x: command.x, y: command.y, z: command.z }); record(event); return { ok: true, event }; }\n    return { ok: false };\n  }\n  return {\n    requestPlace(x, y, z, blockId, commandId) { return commandQueue.push({ type: \"build.place.request\", commandId, x, y, z, blockId }); },\n    requestBreak(x, y, z, commandId) { return commandQueue.push({ type: \"block.break.request\", commandId, x, y, z }); },\n    tick() { for (const command of commandQueue.drain(\"build.place.request\")) accept(command); for (const command of commandQueue.drain(\"block.break.request\")) accept(command); },\n    getState() { return { domain: \"build-break-domain-service-kit\", commands: [\"build.place.request\", \"block.break.request\"], events: events.recent(10), domainTrace: domainTrace.slice(), appliedCommandIds: commandQueue.getState().appliedCommandIds }; }\n  };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/domains/movementDomain.js",
+      "kind": "source",
+      "content": "export function createMovementDomain({ events }) {\n  const state = { player: { x: 0, y: 7, z: 10, yaw: 0, pitch: -0.12 }, inputIntent: { forward: 0, strafe: 0, turn: 0 }, movementTrace: [] };\n  return {\n    requestInput(intent, commandId) { state.inputIntent = { ...state.inputIntent, ...intent }; const event = events.emit(\"movement.input.accepted\", { commandId, intent: state.inputIntent }); state.movementTrace.push(event); if (state.movementTrace.length > 20) state.movementTrace.shift(); },\n    tick(dt) { const p = state.player; p.yaw += state.inputIntent.turn * dt * 1.8; p.x += Math.sin(p.yaw) * state.inputIntent.forward * dt * 6 + Math.cos(p.yaw) * state.inputIntent.strafe * dt * 6; p.z += -Math.cos(p.yaw) * state.inputIntent.forward * dt * 6 + Math.sin(p.yaw) * state.inputIntent.strafe * dt * 6; },\n    getPlayer() { return state.player; },\n    getState() { return { ...state, movementTrace: state.movementTrace.slice(-8) }; }\n  };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/domains/objectiveSequence.js",
+      "kind": "source",
+      "content": "import { biomeAt } from \"../world/terrain.js\";\nexport function createObjectiveSequence({ movement, events }) {\n  const state = { current: \"sample three biomes\", visitedBiomes: [], completed: false };\n  return {\n    tick() { const p = movement.getPlayer(); const biome = biomeAt(Math.round(p.x), Math.round(p.z)); if (!state.visitedBiomes.includes(biome)) { state.visitedBiomes.push(biome); events.emit(\"sequence.objective.updated\", { biome, visitedBiomes: state.visitedBiomes.slice() }); } if (state.visitedBiomes.length >= 3 && !state.completed) { state.completed = true; events.emit(\"sequence.completed\", { objective: state.current }); } },\n    getState() { return { ...state }; }\n  };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/renderer/materials.js",
+      "kind": "source",
+      "content": "import { BLOCK_BY_ID } from \"../data/blocks.js\";\nexport function createMaterials(THREE) { const materials = {}; for (const block of Object.values(BLOCK_BY_ID)) { if (block.id === 0) continue; materials[block.id] = new THREE.MeshStandardMaterial({ color: block.color, roughness: 0.8, transparent: block.name === \"glass\", opacity: block.name === \"glass\" ? 0.52 : 1 }); } return materials; }\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/renderer/cameraRig.js",
+      "kind": "source",
+      "content": "export function createCameraRig(camera) { return { update(player) { camera.position.set(player.x, player.y, player.z); camera.rotation.order = \"YXZ\"; camera.rotation.y = player.yaw; camera.rotation.x = player.pitch; } }; }\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/renderer/threeRenderer.js",
+      "kind": "source",
+      "content": "import * as THREE from \"https://unpkg.com/three@0.160.0/build/three.module.js\";\nimport { createMaterials } from \"./materials.js\";\nimport { createCameraRig } from \"./cameraRig.js\";\nexport function createThreeRenderer({ canvas, blockStore, movement }) {\n  const scene = new THREE.Scene(); scene.background = new THREE.Color(0x9ed0ff); scene.fog = new THREE.Fog(0x9ed0ff, 36, 120);\n  const camera = new THREE.PerspectiveCamera(72, innerWidth / innerHeight, 0.1, 300);\n  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true }); renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); renderer.setSize(innerWidth, innerHeight);\n  scene.add(new THREE.HemisphereLight(0xffffff, 0x446644, 1.35)); const sun = new THREE.DirectionalLight(0xffffff, 1.7); sun.position.set(24, 40, 18); scene.add(sun);\n  const geometry = new THREE.BoxGeometry(1, 1, 1); const materials = createMaterials(THREE); const group = new THREE.Group(); scene.add(group); const rig = createCameraRig(camera);\n  function rebuild() { group.clear(); const buckets = new Map(); for (const block of blockStore.entries()) { if (!buckets.has(block.blockId)) buckets.set(block.blockId, []); buckets.get(block.blockId).push(block); } for (const [blockId, blocks] of buckets) { const mesh = new THREE.InstancedMesh(geometry, materials[blockId], blocks.length); const helper = new THREE.Object3D(); blocks.forEach((block, index) => { helper.position.set(block.x, block.y, block.z); helper.updateMatrix(); mesh.setMatrixAt(index, helper.matrix); }); group.add(mesh); } }\n  function draw() { rig.update(movement.getPlayer()); renderer.render(scene, camera); }\n  function resize() { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); }\n  addEventListener(\"resize\", resize);\n  return { draw, rebuild, resize, getForwardTarget(distance = 4) { const p = movement.getPlayer(); const x = Math.round(p.x + Math.sin(p.yaw) * distance); const z = Math.round(p.z - Math.cos(p.yaw) * distance); return { x, y: Math.max(1, Math.round(p.y - 3)), z }; } };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/host/inputAdapter.js",
+      "kind": "source",
+      "content": "export function createInputAdapter({ canvas, movement, inventory, buildBreak, renderer }) {\n  const keys = new Set(); let frame = 0;\n  addEventListener(\"keydown\", (event) => { keys.add(event.key.toLowerCase()); const number = Number(event.key); if (number >= 1 && number <= 5) inventory.select(number, `inventory.select:${frame}:${number}`); });\n  addEventListener(\"keyup\", (event) => keys.delete(event.key.toLowerCase())); addEventListener(\"blur\", () => keys.clear());\n  canvas.addEventListener(\"contextmenu\", (event) => event.preventDefault());\n  canvas.addEventListener(\"pointerdown\", (event) => { const target = renderer.getForwardTarget(4); if (event.button === 2) buildBreak.requestPlace(target.x, target.y, target.z, inventory.getSelectedBlock(), `place:${frame}:${target.x}:${target.y}:${target.z}`); else buildBreak.requestBreak(target.x, target.y, target.z, `break:${frame}:${target.x}:${target.y}:${target.z}`); });\n  return { flush() { frame += 1; movement.requestInput({ forward: (keys.has(\"w\") || keys.has(\"arrowup\") ? 1 : 0) - (keys.has(\"s\") || keys.has(\"arrowdown\") ? 1 : 0), strafe: (keys.has(\"d\") ? 1 : 0) - (keys.has(\"a\") ? 1 : 0), turn: (keys.has(\"arrowleft\") ? 1 : 0) - (keys.has(\"arrowright\") ? 1 : 0) }, `movement.input:${frame}`); } };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/host/hud.js",
+      "kind": "source",
+      "content": "import { BLOCK_BY_ID } from \"../data/blocks.js\";\nexport function createHud({ status }) { return { draw(snapshot) { const block = BLOCK_BY_ID[snapshot.inventory.selectedBlockId]?.name ?? \"block\"; status.textContent = `Biome samples ${snapshot.sequence.visitedBiomes.length}/3 \u00b7 Block ${block} \u00b7 Domain events ${snapshot.buildBreak.domainTrace.length}`; } }; }\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/host/gameHost.js",
+      "kind": "source",
+      "content": "export function installGameHost(parts) {\n  window.GameHost = {\n    getState() { return { clock: parts.clock.getState(), movement: parts.movement.getState(), inventory: parts.inventory.getState(), buildBreak: parts.buildBreak.getState(), sequence: parts.sequence.getState(), world: parts.blockStore.getState(), events: parts.events.recent(16) }; },\n    tick: parts.tick,\n    rebuild: parts.renderer.rebuild\n  };\n}\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/src/main.js",
+      "kind": "source",
+      "content": "import { createCommandQueue } from \"./runtime/commandQueue.js\";\nimport { createEventBus } from \"./runtime/eventBus.js\";\nimport { createClock } from \"./runtime/clock.js\";\nimport { createBlockStore } from \"./world/blockStore.js\";\nimport { generateInitialWorld } from \"./world/terrain.js\";\nimport { createInventoryDomain } from \"./domains/inventoryDomain.js\";\nimport { createBuildBreakDomain } from \"./domains/buildBreakDomain.js\";\nimport { createMovementDomain } from \"./domains/movementDomain.js\";\nimport { createObjectiveSequence } from \"./domains/objectiveSequence.js\";\nimport { createThreeRenderer } from \"./renderer/threeRenderer.js\";\nimport { createInputAdapter } from \"./host/inputAdapter.js\";\nimport { createHud } from \"./host/hud.js\";\nimport { installGameHost } from \"./host/gameHost.js\";\nconst canvas = document.querySelector(\"#game\"); const status = document.querySelector(\"#status\"); const errorPanel = document.querySelector(\"#errorPanel\");\nfunction showFatal(error) { errorPanel.hidden = false; errorPanel.textContent = String(error?.stack ?? error?.message ?? error); }\ntry {\n  const commandQueue = createCommandQueue(); const events = createEventBus(); const clock = createClock(); const blockStore = createBlockStore(); generateInitialWorld(blockStore);\n  const inventory = createInventoryDomain({ events }); const movement = createMovementDomain({ events }); const buildBreak = createBuildBreakDomain({ blockStore, inventory, events, commandQueue }); const sequence = createObjectiveSequence({ movement, events });\n  const renderer = createThreeRenderer({ canvas, blockStore, movement }); renderer.rebuild(); const input = createInputAdapter({ canvas, movement, inventory, buildBreak, renderer }); const hud = createHud({ status });\n  function tick(dt = 1 / 60) { const time = clock.tick(dt); input.flush(); movement.tick(time.dt); buildBreak.tick(); sequence.tick(); renderer.rebuild(); renderer.draw(); hud.draw(window.GameHost.getState()); }\n  installGameHost({ clock, events, blockStore, inventory, movement, buildBreak, sequence, renderer, tick });\n  let last = performance.now(); function frame(now) { const dt = Math.min(1 / 30, (now - last) / 1000 || 1 / 60); last = now; tick(dt); requestAnimationFrame(frame); }\n  status.textContent = \"Voxel DSK lab ready\"; requestAnimationFrame(frame);\n} catch (error) { showFatal(error); }\n"
+    },
+    {
+      "path": "docs/games/2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/tests/smoke.mjs",
+      "kind": "test",
+      "content": "import assert from \"node:assert/strict\";\nimport { createCommandQueue } from \"../src/runtime/commandQueue.js\";\nconst queue = createCommandQueue();\nassert.equal(queue.markApplied(\"cmd-1\"), true);\nassert.equal(queue.markApplied(\"cmd-1\"), false);\nconsole.log(\"smoke passed\");\n"
+    }
+  ],
+  "source_slots": [
+    "product-brief",
+    "runtime-contract",
+    "domain-map",
+    "world-data",
+    "three-renderer",
+    "movement",
+    "build-break-dsk",
+    "inventory-dsk",
+    "sequence-objective",
+    "ui-hud",
+    "debug-host",
+    "tests",
+    "performance",
+    "content-polish",
+    "self-alignment-review",
+    "repair-strategy"
+  ],
+  "expected_gates": [
+    "path-filter",
+    "public-output-membrane",
+    "module-graph-filter",
+    "dsk-boundary-filter",
+    "renderer-boundary-filter",
+    "gamehost-filter",
+    "syntax-filter"
+  ],
+  "created_at": "2026-06-26T09-32-19Z"
+}

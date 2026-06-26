@@ -1,0 +1,6 @@
+{
+  "schema": "liveharness.interpretation-reconcile.v1",
+  "goal_id": "massive-voxel-dsk-loop-lab-acf98e99",
+  "summary": "Locked the master interpretation for this run. All turn actions must reference this interpretation version.",
+  "locked_interpretation_ref": "input/master-interpretation.json"
+}

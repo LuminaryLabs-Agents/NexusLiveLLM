@@ -2,16 +2,61 @@
   "version": 1,
   "capabilities": [
     {
-      "id": "launcher.manifest.update",
-      "status": "stable",
-      "introduced_by": "bootstrap",
-      "evidence": ["docs/games.json is the launcher source of truth"]
-    },
-    {
       "id": "bounded.action.panel",
       "status": "candidate",
       "introduced_by": "002-kit-builder",
-      "actions": ["CONTINUE", "SHOW_ADVANCED", "ASK_ORCHESTRATOR", "ASK_SLOT", "RECONCILE", "STOP"]
+      "actions": [
+        "CONTINUE",
+        "SHOW_ADVANCED",
+        "ASK_ORCHESTRATOR",
+        "ASK_SLOT",
+        "RECONCILE",
+        "STOP"
+      ]
+    },
+    {
+      "id": "dsk.build-break.trace",
+      "status": "candidate",
+      "evidence": [
+        "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+      ]
+    },
+    {
+      "id": "gamehost.debug.surface",
+      "status": "candidate",
+      "evidence": [
+        "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+      ]
+    },
+    {
+      "id": "launcher.manifest.update",
+      "status": "stable",
+      "introduced_by": "bootstrap",
+      "evidence": [
+        "docs/games.json is the launcher source of truth"
+      ]
+    },
+    {
+      "id": "massive.sandbox.build-loop",
+      "status": "candidate",
+      "evidence": [
+        "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+      ]
+    },
+    {
+      "id": "public-output.membrane",
+      "status": "stable",
+      "evidence": [
+        "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+      ]
+    },
+    {
+      "id": "single-final-commit.policy",
+      "status": "stable",
+      "evidence": [
+        "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+      ]
     }
-  ]
+  ],
+  "updated_at": "2026-06-26T09-32-20Z"
 }

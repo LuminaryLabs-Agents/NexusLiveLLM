@@ -1,1 +1,4 @@
 {"event":"initialized","ledger":"validation","harness":"LiveHarnessV.01"}
+{"time": "2026-06-26T09-32-19Z", "event": "slots.validated", "ok": true, "valid": 16, "invalid": 0}
+{"time": "2026-06-26T09-32-20Z", "event": "sandbox.validated", "candidate_id": "2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "ok": true, "failed": []}
+{"time": "2026-06-26T09-32-20Z", "event": "public.validated", "ok": true, "failed": []}

@@ -5,5 +5,15 @@
   "stable_capabilities": [],
   "candidate_capabilities": [],
   "known_failure_patterns": [],
-  "latest_lessons": []
+  "latest_lessons": [
+    "Single final commit keeps workflow history readable.",
+    "Renderer should present state while domains own commands/events.",
+    "Sandbox-first writes prevent half-broken public output."
+  ],
+  "updated_at": "2026-06-26T09-32-20Z",
+  "latest_massive_build": {
+    "run_id": "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop",
+    "candidate_id": "2026-06-26t09-32-18z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
+    "ok": true
+  }
 }

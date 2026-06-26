@@ -1,0 +1,9 @@
+{
+  "id": "public-output-membrane",
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    "README.md contains soft term: harness"
+  ],
+  "data": {}
+}

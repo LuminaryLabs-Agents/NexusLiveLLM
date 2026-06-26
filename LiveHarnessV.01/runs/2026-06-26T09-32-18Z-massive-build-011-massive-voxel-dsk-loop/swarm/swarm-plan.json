@@ -1,0 +1,1258 @@
+{
+  "schema": "liveharness.swarm-plan.v1",
+  "run_id": "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop",
+  "loop_index": 1,
+  "created_at": "2026-06-26T09-32-19Z",
+  "max_workers": 16,
+  "workers": [
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-01-product-brief",
+      "slot_id": "product-brief",
+      "label": "Product Brief Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.user_experience",
+      "task": "Refine public title, goal, feature list, and non-goals.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-02-runtime-contract",
+      "slot_id": "runtime-contract",
+      "label": "Runtime Contract Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define tick loop, command queue, event bus, snapshot, and state contract.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-03-domain-map",
+      "slot_id": "domain-map",
+      "label": "DSK Boundary Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define domain bubbles, commands, events, owned state, invariants, and should-not-own rules.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-04-world-data",
+      "slot_id": "world-data",
+      "label": "World Data Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define terrain, chunks, blocks, biomes, and level descriptors.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-05-three-renderer",
+      "slot_id": "three-renderer",
+      "label": "Three.js Renderer Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define Three.js scene, chunk meshes, materials, camera, and renderer boundary.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-06-movement",
+      "slot_id": "movement",
+      "label": "Movement Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define movement state, input intent, movement events, and camera relation.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-07-build-break-dsk",
+      "slot_id": "build-break-dsk",
+      "label": "Build/Break DSK Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define build.place.request and block.break.request command/event flow.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-08-inventory-dsk",
+      "slot_id": "inventory-dsk",
+      "label": "Inventory DSK Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define block palette, selected block, inventory state, and transaction ledger.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-09-sequence-objective",
+      "slot_id": "sequence-objective",
+      "label": "Sequence Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define objective flow, tutorial beats, gates, and progression state.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-10-ui-hud",
+      "slot_id": "ui-hud",
+      "label": "UI/HUD Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.user_experience",
+      "task": "Define concise HUD, status, controls, and public copy.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-11-debug-host",
+      "slot_id": "debug-host",
+      "label": "Debug Host Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define window.GameHost.getState() and snapshot/debug surfaces.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-12-tests",
+      "slot_id": "tests",
+      "label": "Tool/Test Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define smoke tests, syntax checks, and GameHost/domain trace expectations.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-13-performance",
+      "slot_id": "performance",
+      "label": "Performance Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define file count, instancing, chunk budget, and draw budget.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-14-content-polish",
+      "slot_id": "content-polish",
+      "label": "Content Polish Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define names, theme, readable copy, biome and feedback polish.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-15-self-alignment-review",
+      "slot_id": "self-alignment-review",
+      "label": "Self-Alignment Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Review output against master interpretation and gate policy.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-16-repair-strategy",
+      "slot_id": "repair-strategy",
+      "label": "Repair Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Route failures to the right loopback target and repair slot.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    }
+  ],
+  "policy_ref": "state/swarm-policy.json"
+}

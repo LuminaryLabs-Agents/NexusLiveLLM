@@ -1,0 +1,78 @@
+{
+  "schema": "liveharness.worker-contract.v1",
+  "worker_id": "worker-13-performance",
+  "slot_id": "performance",
+  "label": "Performance Worker",
+  "critical": false,
+  "goal_ref": "input/master-interpretation.json",
+  "goal_ast_node": "product.architecture",
+  "task": "Define file count, instancing, chunk budget, and draw budget.",
+  "input_context": {
+    "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+    "public_product_intent": {
+      "title": "Massive Voxel DSK Loop Lab",
+      "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+      "primary_verbs": [
+        "move",
+        "place",
+        "select",
+        "build",
+        "break",
+        "validate"
+      ],
+      "target_artifact": "playable browser experiment or designer-facing kit tool"
+    },
+    "architecture_contract": {
+      "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+      "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+      "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+      "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+      "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+    },
+    "target_capabilities": [
+      "product-brief membrane",
+      "debug-host-state",
+      "top-ten rolling gallery",
+      "voxel host",
+      "build-break-domain-service-kit trace",
+      "inventory-domain-service-kit state",
+      "movement-control-kit state",
+      "domain bubble contract",
+      "command-event membrane",
+      "idempotency ledger",
+      "sequence gate workflow",
+      "stage gate transition"
+    ],
+    "loop_index": 1
+  },
+  "must_return": {
+    "summary": "string",
+    "provides": [
+      "string"
+    ],
+    "requires": [
+      "string"
+    ],
+    "owned_state": [
+      "string"
+    ],
+    "commands": [
+      "string"
+    ],
+    "events": [
+      "string"
+    ],
+    "invariants": [
+      "string"
+    ],
+    "file_plan": [
+      {
+        "path": "string",
+        "purpose": "string"
+      }
+    ],
+    "risks": [
+      "string"
+    ]
+  }
+}

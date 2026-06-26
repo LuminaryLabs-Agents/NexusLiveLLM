@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Massive Voxel DSK Loop Lab</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main id="app">
+    <canvas id="game" role="application" aria-label="Voxel DSK experiment"></canvas>
+    <aside id="hud" aria-label="Game HUD">
+      <header id="status" aria-live="polite">Loading voxel domains...</header>
+      <footer id="controls">WASD move · arrows turn · 1-5 select · click remove · right-click place</footer>
+    </aside>
+    <section id="errorPanel" role="alert" hidden></section>
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
