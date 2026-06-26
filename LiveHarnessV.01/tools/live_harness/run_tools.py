@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from .common import repo_root, harness_root, write_json, ledger, utc_id, tool_result
+from .public_output_check import scan_docs as public_output_membrane_check
 
 
 def js_syntax() -> dict[str, Any]:
@@ -56,7 +57,7 @@ def launcher_manifest() -> dict[str, Any]:
 
 
 def run_all() -> dict[str, Any]:
-    results = [js_syntax(), html_smoke(), launcher_manifest()]
+    results = [js_syntax(), html_smoke(), launcher_manifest(), public_output_membrane_check()]
     out = {"ok": all(r["ok"] for r in results), "tools": results}
     ledger("tool-ledger.jsonl", {"time": utc_id(), "ok": out["ok"], "tools": [r["id"] for r in results]})
     return out
