@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "active_goal_id": "three-open-world-game",
+  "run_policy": {
+    "max_goals_per_run": 1,
+    "max_turns_per_goal": 6,
+    "max_total_turns": 30,
+    "commit_strategy": "single_commit_at_end"
+  },
+  "goals": [
+    {
+      "id": "three-open-world-game",
+      "status": "queued",
+      "priority": 1,
+      "title": "Build Three.js open-world rapid game proof",
+      "description": "Use the LiveHarnessV.01 orchestration protocol to publish a procedural Three.js open-world demo.",
+      "success_criteria": [
+        "docs/games.json includes generated game",
+        "docs/index.html links to generated game",
+        "generated game has index.html style.css game.js README.md",
+        "JavaScript syntax checks pass",
+        "launcher manifest checks pass"
+      ],
+      "required_tools": ["js_syntax_check", "html_smoke_check", "launcher_manifest_check"],
+      "model_tier": "orchestrator",
+      "fallback_model_tier": "thinking",
+      "progress": {
+        "completed_steps": [],
+        "next_step": "run rapid-game orchestration"
+      }
+    }
+  ]
+}
