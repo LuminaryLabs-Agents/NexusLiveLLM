@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "repos": [
+    "LuminaryLabs-Agents/NexusRealtime-KitBuilder03",
+    "LuminaryLabs-Dev/NexusRealtime",
+    "LuminaryLabs-Agents/NexusRealtime-ProtoKits",
+    "LuminaryLabs-Agents/NexusRealtime-Experiments"
+  ],
+  "queries": [
+    "createRealtimeGame createObjectiveFlowKit",
+    "Domain Service Kit command event ledger",
+    "GameHost getState debug host",
+    "ProtoKit createXKit NexusRealtime"
+  ]
+}
