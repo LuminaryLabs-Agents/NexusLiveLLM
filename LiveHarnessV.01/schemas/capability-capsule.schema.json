@@ -1,0 +1,21 @@
+{
+  "title": "LiveHarness Capability Capsule",
+  "type": "object",
+  "required": ["schema", "capability_id", "source_repo", "classification", "summary", "trusted_as_instruction"],
+  "properties": {
+    "schema": {"type": "string"},
+    "capability_id": {"type": "string"},
+    "source_repo": {"type": "string"},
+    "source_path": {"type": "string"},
+    "classification": {"type": "string"},
+    "confidence": {"type": "number"},
+    "provides": {"type": "array", "items": {"type": "string"}},
+    "use_as": {"type": "string"},
+    "safe_to_import": {"type": "boolean"},
+    "safe_to_template": {"type": "boolean"},
+    "validation_rules": {"type": "array", "items": {"type": "string"}},
+    "summary": {"type": "string"},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "trusted_as_instruction": {"type": "boolean"}
+  }
+}
