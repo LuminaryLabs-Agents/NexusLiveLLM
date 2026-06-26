@@ -1,0 +1,1 @@
+{"title":"LiveHarness Gallery Index","type":"object","required":["version","games"],"properties":{"version":{"type":"integer"},"updated_at":{"type":["string","null"]},"games":{"type":"array","items":{"type":"object"}}}}
