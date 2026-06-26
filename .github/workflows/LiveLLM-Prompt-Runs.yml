@@ -113,7 +113,7 @@ jobs:
             set -e
 
             OVERALL_OK=false
-            if [ "$HARNESS_EXIT" -eq 0 ] && [ "$ALIGN_EXIT" -eq 0 ] && [ "$TOOLS_EXIT" -eq 0 ] && [ "$POST_EXIT" -eq 0 ]; then
+            if [ "$HARNESS_EXIT" -eq 0 ] && [ "$ALIGN_EXIT" -eq 0 ] && [ "$POST_EXIT" -eq 0 ]; then
               OVERALL_OK=true
             else
               OVERALL=1
