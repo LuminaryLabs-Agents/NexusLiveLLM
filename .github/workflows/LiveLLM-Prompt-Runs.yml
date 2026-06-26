@@ -62,11 +62,22 @@ jobs:
 
             cp "$PROMPT_FILE" "$RUN_DIR/input/prompt.md"
             printf '%s\n' "$PROMPT_FILE" > "$RUN_DIR/input/prompt-path.txt"
-            cat > "$RUN_DIR/input/trigger.json" <<JSON
-          {"event":"${{ github.event_name }}","ref":"${{ github.ref }}","sha":"${{ github.sha }}","workflow":"LiveLLM Prompt Runs","run_id":"${{ github.run_id }}","prompt_file":"$PROMPT_FILE"}
-          JSON
             env | sort > "$RUN_DIR/logs/env.txt"
             PROMPT_TEXT="$(cat "$PROMPT_FILE")"
+
+            python - "$RUN_DIR/input/trigger.json" "$PROMPT_FILE" <<'PY'
+          import json, os, sys
+          path, prompt_file = sys.argv[1], sys.argv[2]
+          data = {
+            "event": os.environ.get("GITHUB_EVENT_NAME"),
+            "ref": os.environ.get("GITHUB_REF"),
+            "sha": os.environ.get("GITHUB_SHA"),
+            "workflow": "LiveLLM Prompt Runs",
+            "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+            "prompt_file": prompt_file,
+          }
+          open(path, "w", encoding="utf-8").write(json.dumps(data, indent=2) + "\n")
+          PY
 
             echo "## Prompt: $BASENAME" >> "$GITHUB_STEP_SUMMARY"
             echo "" >> "$GITHUB_STEP_SUMMARY"
@@ -90,29 +101,30 @@ jobs:
               OVERALL=1
             fi
 
-            cat > "$RUN_DIR/status/exit-codes.json" <<JSON
-          {"harness_exit":$HARNESS_EXIT,"tools_exit":$TOOLS_EXIT,"overall_ok":$OVERALL_OK}
-          JSON
+            python - "$RUN_DIR/status/exit-codes.json" "$HARNESS_EXIT" "$TOOLS_EXIT" "$OVERALL_OK" <<'PY'
+          import json, sys
+          path = sys.argv[1]
+          harness_exit = int(sys.argv[2])
+          tools_exit = int(sys.argv[3])
+          overall_ok = sys.argv[4].lower() == "true"
+          open(path, "w", encoding="utf-8").write(json.dumps({"harness_exit": harness_exit, "tools_exit": tools_exit, "overall_ok": overall_ok}, indent=2) + "\n")
+          PY
 
             if [ "$OVERALL_OK" = true ]; then
-              cat > "$RUN_DIR/status/success.json" <<JSON
-          {"status":"success","run_id":"$RUN_ID"}
-          JSON
+              printf '{"status":"success","run_id":"%s"}\n' "$RUN_ID" > "$RUN_DIR/status/success.json"
             else
-              cat > "$RUN_DIR/status/failure.json" <<JSON
-          {"status":"failure","run_id":"$RUN_ID","harness_exit":$HARNESS_EXIT,"tools_exit":$TOOLS_EXIT}
-          JSON
+              printf '{"status":"failure","run_id":"%s","harness_exit":%s,"tools_exit":%s}\n' "$RUN_ID" "$HARNESS_EXIT" "$TOOLS_EXIT" > "$RUN_DIR/status/failure.json"
             fi
 
-            cat > "$RUN_DIR/logs/workflow-summary.md" <<MD
-          # LiveHarness Prompt Run
-
-          - Prompt: $PROMPT_FILE
-          - Run ID: $RUN_ID
-          - Harness exit: $HARNESS_EXIT
-          - Tools exit: $TOOLS_EXIT
-          - Overall OK: $OVERALL_OK
-          MD
+            {
+              echo "# LiveHarness Prompt Run"
+              echo ""
+              echo "- Prompt: $PROMPT_FILE"
+              echo "- Run ID: $RUN_ID"
+              echo "- Harness exit: $HARNESS_EXIT"
+              echo "- Tools exit: $TOOLS_EXIT"
+              echo "- Overall OK: $OVERALL_OK"
+            } > "$RUN_DIR/logs/workflow-summary.md"
 
             echo "- Harness exit: \`$HARNESS_EXIT\`" >> "$GITHUB_STEP_SUMMARY"
             echo "- Tools exit: \`$TOOLS_EXIT\`" >> "$GITHUB_STEP_SUMMARY"
