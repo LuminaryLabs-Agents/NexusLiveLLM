@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "agents": [
+    {
+      "agent_id": "nexusrealtime-core",
+      "repo": "LuminaryLabs-Dev/NexusRealtime",
+      "role": "core_runtime",
+      "exploration_task": "Find runtime, Domain Service Kit, SequenceNode, terrain, procedural, and validation capabilities relevant to generated browser games.",
+      "allowed_uses": ["runtime_dependency", "reference_pattern", "validation_source"]
+    },
+    {
+      "agent_id": "nexusrealtime-protokits",
+      "repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits",
+      "role": "protokit_source",
+      "exploration_task": "Find reusable experimental kits, import candidates, templates, demos, and validation patterns.",
+      "allowed_uses": ["runtime_dependency", "reference_pattern", "template_seed", "validation_source"]
+    },
+    {
+      "agent_id": "kitbuilder03-local",
+      "repo": "LuminaryLabs-Agents/NexusRealtime-KitBuilder03",
+      "role": "local_project",
+      "exploration_task": "Map current harness tools, workflows, run artifacts, generated apps, state, memory, and validation filters.",
+      "allowed_uses": ["reference_pattern", "template_seed", "validation_source"]
+    }
+  ]
+}
