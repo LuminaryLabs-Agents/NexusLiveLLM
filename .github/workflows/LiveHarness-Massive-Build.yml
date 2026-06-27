@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       prompt_file:
-        description: "Repo-relative prompt file. Leave blank for newest LiveHarnessV.01/prompt-inbox/*.md"
+        description: "Repo-relative prompt file. Leave blank for newest prompt."
         required: false
         default: ""
       max_workers:
@@ -20,9 +20,15 @@ on:
       - main
     paths:
       - "LiveHarnessV.01/prompt-inbox/**"
+      - "LiveHarnessV.01/expanded-prompts/**"
+      - "LiveHarnessV.01/stage-triggers/**"
+      - "LiveHarnessV.01/state/source-intake-agents.json"
+      - "LiveHarnessV.01/state/repo-source-policy.json"
+      - "LiveHarnessV.01/tools/live_harness/**"
       - "LiveHarnessV.01/stages/**"
       - "LiveHarnessV.01/stage-profiles/**"
       - ".github/workflows/LiveHarness-Massive-Build.yml"
+      - ".github/workflows/LiveHarness-Expanded-Build.yml"
 
 permissions:
   contents: write
@@ -72,7 +78,7 @@ jobs:
           if [ -n "${PROMPT_INPUT:-}" ] && [ -f "$PROMPT_INPUT" ]; then
             PROMPT_FILE="$PROMPT_INPUT"
           else
-            PROMPT_FILE="$(find LiveHarnessV.01/prompt-inbox -name '*.md' -type f | sort | tail -n 1 || true)"
+            PROMPT_FILE="$(find LiveHarnessV.01/expanded-prompts LiveHarnessV.01/prompt-inbox -name '*.md' -type f | sort | tail -n 1 || true)"
           fi
 
           if [ -z "${PROMPT_FILE:-}" ]; then
@@ -84,7 +90,7 @@ jobs:
           MAX_LOOPS="${MAX_LOOPS_INPUT:-4}"
           RUN_ID="$(date -u +%Y-%m-%dT%H-%M-%SZ)-massive-build-$(basename "$PROMPT_FILE" .md)"
           RUN_DIR="LiveHarnessV.01/runs/$RUN_ID"
-          mkdir -p "$RUN_DIR/input" "$RUN_DIR/logs" "$RUN_DIR/status" "$RUN_DIR/validation" "$RUN_DIR/swarm" "$RUN_DIR/write-sets" "$RUN_DIR/self-alignment" "$RUN_DIR/loops" "$RUN_DIR/sandbox"
+          mkdir -p "$RUN_DIR/input" "$RUN_DIR/logs" "$RUN_DIR/status" "$RUN_DIR/validation" "$RUN_DIR/swarm" "$RUN_DIR/write-sets" "$RUN_DIR/self-alignment" "$RUN_DIR/loops" "$RUN_DIR/sandbox" "$RUN_DIR/intake"
           cp "$PROMPT_FILE" "$RUN_DIR/input/prompt.md"
           printf '%s\n' "$PROMPT_FILE" > "$RUN_DIR/input/prompt-path.txt"
 
@@ -105,7 +111,7 @@ jobs:
             NVIDIA_API_KEY="${NVIDIA_API_KEY:-}" \
             NVIDIA_MODEL="$NVIDIA_MODEL" \
             PYTHONPATH=tools \
-            python -m live_harness.massive_build_loop \
+            python -m live_harness.massive_build_loop_v3 \
               --run-id "$RUN_ID" \
               --run-dir "runs/$RUN_ID" \
               --prompt-file "$PROMPT_FILE" \
@@ -126,7 +132,8 @@ jobs:
             "build_exit": $BUILD_EXIT,
             "single_commit_mode": True,
             "prompt_file": "$PROMPT_FILE",
-            "run_id": "$RUN_ID"
+            "run_id": "$RUN_ID",
+            "entrypoint": "massive_build_loop_v3"
           }, indent=2) + "\n")
           if not run_dir.joinpath("status/final-status.json").exists():
             run_dir.joinpath("status/final-status.json").write_text(json.dumps({
