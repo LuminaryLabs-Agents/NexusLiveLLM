@@ -1,0 +1,13 @@
+{
+  "trigger": "source-intake-expanded-build-v3",
+  "prompt": "LiveHarnessV.01/expanded-prompts/004-full-block-world-v3.md",
+  "requested_at": "2026-06-27T00:00:00Z",
+  "intent": "force workflow trigger for repo-aware full block-world v3 build",
+  "expected_artifacts": [
+    "intake/source-intake-summary.json",
+    "intake/fused/integration-plan.json",
+    "swarm/swarm-plan.json",
+    "validation/repo-capability-usage-filter.json",
+    "status/final-status.json"
+  ]
+}
