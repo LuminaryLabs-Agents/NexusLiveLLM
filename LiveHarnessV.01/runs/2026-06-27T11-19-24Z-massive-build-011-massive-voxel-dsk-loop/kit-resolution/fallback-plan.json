@@ -1,0 +1,10 @@
+{
+  "schema": "liveharness.fallback-plan.v1",
+  "fallbacks": {
+    "runtime": "src/runtime/localRuntime.js",
+    "input": "src/host/inputAdapter.js",
+    "world-loader": "src/world/worldLoader.js",
+    "terrain": "src/world/chunkStore.js",
+    "domain-service": "src/domains/buildBreakDomain.js"
+  }
+}

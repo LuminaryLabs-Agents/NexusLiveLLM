@@ -1,0 +1,9 @@
+{
+  "id": "public-output-membrane",
+  "ok": true,
+  "errors": [],
+  "warnings": [
+    "index.html contains soft term: agent"
+  ],
+  "data": {}
+}

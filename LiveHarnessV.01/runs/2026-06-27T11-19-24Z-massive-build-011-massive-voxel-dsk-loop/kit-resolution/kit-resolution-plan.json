@@ -1,0 +1,46 @@
+{
+  "schema": "liveharness.kit-resolution-plan.v1",
+  "mode": "import-map-with-local-fallback",
+  "composition_order": [
+    "nexusrealtime.core",
+    "protokit.action-input-kit",
+    "protokit.world-patch-kit",
+    "protokit.terrain-sampler-kit",
+    "local.fallbacks"
+  ],
+  "required_capabilities": [
+    {
+      "id": "runtime",
+      "preferred": "nexusrealtime.createRealtimeGame",
+      "fallback": "src/runtime/localRuntime.js"
+    },
+    {
+      "id": "input",
+      "preferred": "protokit.action-input-kit",
+      "fallback": "src/host/inputAdapter.js"
+    },
+    {
+      "id": "world-loader",
+      "preferred": "protokit.world-patch-kit",
+      "fallback": "src/world/worldLoader.js"
+    },
+    {
+      "id": "terrain",
+      "preferred": "protokit.terrain-sampler-kit",
+      "fallback": "src/world/chunkStore.js"
+    },
+    {
+      "id": "domain-service",
+      "preferred": "nexusrealtime.domain-service-kit",
+      "fallback": "src/domains/buildBreakDomain.js"
+    }
+  ],
+  "fallbacks_required": true,
+  "rules": [
+    "html remains bounded shell",
+    "prefer module import when safe",
+    "fallbacks must be present",
+    "renderer consumes state only"
+  ],
+  "created_at": "2026-06-27T11-19-24Z"
+}

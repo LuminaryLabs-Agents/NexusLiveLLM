@@ -1,0 +1,28 @@
+{
+  "worker_id": "worker-12-tests",
+  "slot_id": "tests",
+  "summary": "Define smoke tests, syntax checks, and GameHost/domain trace expectations.",
+  "provides": [
+    "smoke-tests",
+    "domain-trace-check"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [],
+  "commands": [],
+  "events": [],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [
+    {
+      "path": "tests/smoke.mjs",
+      "purpose": "headless-ish static smoke"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}

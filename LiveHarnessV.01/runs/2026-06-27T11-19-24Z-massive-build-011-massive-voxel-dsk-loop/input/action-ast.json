@@ -1,0 +1,56 @@
+{
+  "schema": "liveharness.action-ast.v1",
+  "stage_id": "40-prototype",
+  "nodes": [
+    {
+      "node_id": "read_master_interpretation",
+      "allowed_actions": [
+        "READ_ARTIFACT",
+        "THINK"
+      ]
+    },
+    {
+      "node_id": "align_goal",
+      "allowed_actions": [
+        "ALIGN_GOAL",
+        "THINK"
+      ]
+    },
+    {
+      "node_id": "draft_or_inspect_output",
+      "allowed_actions": [
+        "PLAN",
+        "READ_ARTIFACT",
+        "WRITE_SET_PROPOSE"
+      ]
+    },
+    {
+      "node_id": "gate_boundary_action",
+      "allowed_actions": [
+        "ASK_GATE",
+        "APPLY_WRITE_SET"
+      ]
+    },
+    {
+      "node_id": "run_tools",
+      "allowed_actions": [
+        "RUN_TOOL"
+      ]
+    },
+    {
+      "node_id": "self_review",
+      "allowed_actions": [
+        "SELF_REVIEW",
+        "LOOPBACK",
+        "FINAL_REPORT"
+      ]
+    }
+  ],
+  "turn_policy": {
+    "max_consecutive_think_actions": 3,
+    "max_alignment_rounds_before_action": 2,
+    "must_act_after_plan": true,
+    "must_validate_after_write": true,
+    "must_self_review_before_stage_advance": true
+  }
+}

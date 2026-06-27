@@ -12,10 +12,10 @@
     "Renderer should present state while domains own commands/events.",
     "Sandbox-first writes prevent half-broken public output."
   ],
-  "updated_at": "2026-06-27T11-18-53Z",
+  "updated_at": "2026-06-27T11-19-25Z",
   "latest_massive_build": {
-    "run_id": "2026-06-27T11-18-52Z-massive-build-011-massive-voxel-dsk-loop",
-    "candidate_id": "2026-06-27t11-18-52z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
+    "run_id": "2026-06-27T11-19-24Z-massive-build-011-massive-voxel-dsk-loop",
+    "candidate_id": "2026-06-27t11-19-24z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
     "ok": true
   }
 }
