@@ -1,0 +1,22 @@
+{
+  "worker_id": "worker-01-product-brief",
+  "slot_id": "product-brief",
+  "summary": "Refine public title, goal, feature list, and non-goals.",
+  "provides": [
+    "product-brief"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [],
+  "commands": [],
+  "events": [],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [],
+  "risks": [],
+  "fallback_used": true
+}

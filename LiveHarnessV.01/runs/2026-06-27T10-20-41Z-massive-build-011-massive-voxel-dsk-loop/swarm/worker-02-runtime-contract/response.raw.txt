@@ -1,0 +1,41 @@
+{
+  "worker_id": "worker-02-runtime-contract",
+  "slot_id": "runtime-contract",
+  "summary": "Define tick loop, command queue, event bus, snapshot, and state contract.",
+  "provides": [
+    "runtime.commandQueue",
+    "runtime.eventBus",
+    "runtime.clock"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [
+    "frame",
+    "events",
+    "commands"
+  ],
+  "commands": [
+    "runtime.tick"
+  ],
+  "events": [
+    "runtime.frame.completed"
+  ],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [
+    {
+      "path": "src/runtime/commandQueue.js",
+      "purpose": "repeat-safe command queue"
+    },
+    {
+      "path": "src/runtime/eventBus.js",
+      "purpose": "event facts"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}

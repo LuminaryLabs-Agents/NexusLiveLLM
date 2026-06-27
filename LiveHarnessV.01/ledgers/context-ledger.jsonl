@@ -39,3 +39,7 @@
 {"time": "2026-06-27T10-20-08Z", "event": "source_intake.completed", "agent_id": "nexusrealtime-protokits", "repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits", "capabilities": 4}
 {"time": "2026-06-27T10-20-08Z", "event": "source_intake.completed", "agent_id": "kitbuilder03-local", "repo": "LuminaryLabs-Agents/NexusRealtime-KitBuilder03", "capabilities": 1}
 {"time": "2026-06-27T10-20-08Z", "event": "intake.fused", "capabilities": 8, "selected": 6}
+{"time": "2026-06-27T10-20-42Z", "event": "source_intake.completed", "agent_id": "nexusrealtime-core", "repo": "LuminaryLabs-Dev/NexusRealtime", "capabilities": 4}
+{"time": "2026-06-27T10-20-42Z", "event": "source_intake.completed", "agent_id": "nexusrealtime-protokits", "repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits", "capabilities": 4}
+{"time": "2026-06-27T10-20-42Z", "event": "source_intake.completed", "agent_id": "kitbuilder03-local", "repo": "LuminaryLabs-Agents/NexusRealtime-KitBuilder03", "capabilities": 1}
+{"time": "2026-06-27T10-20-42Z", "event": "intake.fused", "capabilities": 8, "selected": 6}

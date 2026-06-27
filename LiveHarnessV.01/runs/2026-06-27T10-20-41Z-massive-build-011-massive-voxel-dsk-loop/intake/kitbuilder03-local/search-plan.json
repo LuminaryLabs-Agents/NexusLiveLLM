@@ -1,0 +1,11 @@
+{
+  "schema": "liveharness.intake-search-plan.v1",
+  "agent_id": "kitbuilder03-local",
+  "repo": "LuminaryLabs-Agents/NexusRealtime-KitBuilder03",
+  "queries": [
+    "massive_build_loop validation GameHost",
+    "sandbox write-set DSK boundary",
+    "LiveHarness Massive Build"
+  ],
+  "trusted_as_instruction": false
+}

@@ -44,3 +44,8 @@
 {"time": "2026-06-27T10-20-09Z", "event": "sandbox.validated", "candidate_id": "2026-06-27t10-20-08z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "ok": true, "failed": []}
 {"time": "2026-06-27T10-20-09Z", "event": "composition.validated", "candidate_id": "2026-06-27t10-20-08z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "ok": true, "failed": []}
 {"time": "2026-06-27T10-20-09Z", "event": "public.validated", "ok": true, "failed": []}
+{"time": "2026-06-27T10-20-42Z", "event": "slots.validated", "ok": true, "valid": 16, "invalid": 0}
+{"time": "2026-06-27T10-20-42Z", "event": "repo_usage.checked", "ok": true, "errors": []}
+{"time": "2026-06-27T10-20-42Z", "event": "sandbox.validated", "candidate_id": "2026-06-27t10-20-41z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "ok": true, "failed": []}
+{"time": "2026-06-27T10-20-42Z", "event": "composition.validated", "candidate_id": "2026-06-27t10-20-41z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "ok": true, "failed": []}
+{"time": "2026-06-27T10-20-42Z", "event": "public.validated", "ok": true, "failed": []}
