@@ -1,0 +1,23 @@
+{
+  "schema": "liveharness.self-alignment-result.v1",
+  "phase": "massive-build-loop",
+  "loop_index": 1,
+  "decision": "ADVANCE",
+  "alignment_score": 92,
+  "remaining_issues": [],
+  "strengths": [
+    "path-filter",
+    "public-output-membrane",
+    "repo_capability_usage_filter",
+    "file-size-filter",
+    "required-file-filter",
+    "module-graph-filter",
+    "dsk-boundary-filter",
+    "renderer-boundary-filter",
+    "gamehost-filter",
+    "syntax-filter",
+    "ledger-completeness-filter"
+  ],
+  "loopback_target": null,
+  "completed_at": "2026-06-27T09-28-55Z"
+}

@@ -1,0 +1,7 @@
+{
+  "worker_id": "worker-03-domain-map",
+  "ok": true,
+  "notes": [
+    "Result is bounded evidence for reconciliation, not direct repo mutation."
+  ]
+}

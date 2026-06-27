@@ -19,7 +19,8 @@
       "status": "candidate",
       "evidence": [
         "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True",
-        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True",
+        "2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop ok=True"
       ]
     },
     {
@@ -27,7 +28,8 @@
       "status": "candidate",
       "evidence": [
         "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True",
-        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True",
+        "2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop ok=True"
       ]
     },
     {
@@ -43,7 +45,8 @@
       "status": "candidate",
       "evidence": [
         "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True",
-        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True",
+        "2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop ok=True"
       ]
     },
     {
@@ -51,14 +54,16 @@
       "status": "stable",
       "evidence": [
         "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True",
-        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True",
+        "2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop ok=True"
       ]
     },
     {
       "id": "repo-aware.source-intake",
       "status": "stable",
       "evidence": [
-        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True",
+        "2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop ok=True"
       ]
     },
     {
@@ -66,9 +71,10 @@
       "status": "stable",
       "evidence": [
         "2026-06-26T09-32-18Z-massive-build-011-massive-voxel-dsk-loop ok=True",
-        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True"
+        "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop ok=True",
+        "2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop ok=True"
       ]
     }
   ],
-  "updated_at": "2026-06-27T09-28-09Z"
+  "updated_at": "2026-06-27T09-28-55Z"
 }

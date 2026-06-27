@@ -1,0 +1,109 @@
+{
+  "schema": "liveharness.validation-summary.v1",
+  "run_id": "2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop",
+  "candidate_id": "2026-06-27t09-28-55z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
+  "ok": true,
+  "passed_filters": [
+    "path-filter",
+    "public-output-membrane",
+    "repo_capability_usage_filter",
+    "file-size-filter",
+    "required-file-filter",
+    "module-graph-filter",
+    "dsk-boundary-filter",
+    "renderer-boundary-filter",
+    "gamehost-filter",
+    "syntax-filter",
+    "ledger-completeness-filter"
+  ],
+  "failed_filters": [],
+  "checks": [
+    {
+      "id": "path-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "public-output-membrane",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "repo_capability_usage_filter",
+      "ok": true,
+      "summary": "Repo capability usage passed",
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "imports": [],
+        "integration_plan": "/home/runner/work/NexusRealtime-KitBuilder03/NexusRealtime-KitBuilder03/LiveHarnessV.01/runs/2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop/intake/fused/integration-plan.json"
+      }
+    },
+    {
+      "id": "file-size-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "files": 25,
+        "total_bytes": 28981
+      }
+    },
+    {
+      "id": "required-file-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "module-graph-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "dsk-boundary-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "renderer-boundary-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "gamehost-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "syntax-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "ledger-completeness-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    }
+  ],
+  "loopback": null,
+  "repair_prompt": null,
+  "completed_at": "2026-06-27T09-28-55Z"
+}

@@ -1,0 +1,11 @@
+import assert from "node:assert/strict";
+import { createCommandQueue } from "../src/runtime/commandQueue.js";
+import { createChunkStore } from "../src/world/chunkStore.js";
+import { createSpawnPoint } from "../src/world/spawn.js";
+const queue = createCommandQueue();
+assert.equal(queue.markApplied("cmd-1"), true);
+assert.equal(queue.markApplied("cmd-1"), false);
+const world = createChunkStore({ chunkSize: 16, radius: 2 });
+const spawn = createSpawnPoint(world, { x: 0, z: 0 });
+assert.ok(spawn.y > world.getSurfaceY(0, 0));
+console.log("smoke passed");

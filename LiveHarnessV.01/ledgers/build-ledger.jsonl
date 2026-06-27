@@ -35,3 +35,21 @@
 {"time": "2026-06-27T09-28-09Z", "event": "worker.completed", "worker_id": "worker-15-self-alignment-review", "slot_id": "self-alignment-review", "fallback_used": true}
 {"time": "2026-06-27T09-28-09Z", "event": "worker.completed", "worker_id": "worker-16-repair-strategy", "slot_id": "repair-strategy", "fallback_used": true}
 {"time": "2026-06-27T09-28-09Z", "event": "massive_build.completed", "run_id": "2026-06-27T09-28-09Z-massive-build-011-massive-voxel-dsk-loop", "ok": true, "candidate_id": "2026-06-27t09-28-09z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk"}
+{"time": "2026-06-27T09-28-55Z", "event": "swarm.plan.created", "run_id": "2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop", "workers": 16, "loop_index": 1, "repo_intake": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-01-product-brief", "slot_id": "product-brief", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-02-runtime-contract", "slot_id": "runtime-contract", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-03-domain-map", "slot_id": "domain-map", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-04-world-data", "slot_id": "world-data", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-05-three-renderer", "slot_id": "three-renderer", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-06-movement", "slot_id": "movement", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-07-build-break-dsk", "slot_id": "build-break-dsk", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-08-inventory-dsk", "slot_id": "inventory-dsk", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-09-sequence-objective", "slot_id": "sequence-objective", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-10-ui-hud", "slot_id": "ui-hud", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-11-debug-host", "slot_id": "debug-host", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-12-tests", "slot_id": "tests", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-13-performance", "slot_id": "performance", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-14-content-polish", "slot_id": "content-polish", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-15-self-alignment-review", "slot_id": "self-alignment-review", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "worker.completed", "worker_id": "worker-16-repair-strategy", "slot_id": "repair-strategy", "fallback_used": true}
+{"time": "2026-06-27T09-28-55Z", "event": "massive_build.completed", "run_id": "2026-06-27T09-28-55Z-massive-build-011-massive-voxel-dsk-loop", "ok": true, "candidate_id": "2026-06-27t09-28-55z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk"}
