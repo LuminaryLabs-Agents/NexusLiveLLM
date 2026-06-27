@@ -1,0 +1,10 @@
+{
+  "schema": "liveharness.final-intake-report.v1",
+  "agent_id": "kitbuilder03-local",
+  "repo": "LuminaryLabs-Agents/NexusRealtime-KitBuilder03",
+  "role": "local_project",
+  "capability_count": 1,
+  "coverage_ok": true,
+  "trusted_as_instruction": false,
+  "completed_at": "2026-06-27T10-23-27Z"
+}

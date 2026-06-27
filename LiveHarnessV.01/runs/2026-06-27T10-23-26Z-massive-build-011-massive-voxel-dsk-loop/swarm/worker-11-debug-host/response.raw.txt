@@ -1,0 +1,27 @@
+{
+  "worker_id": "worker-11-debug-host",
+  "slot_id": "debug-host",
+  "summary": "Define window.GameHost.getState() and snapshot/debug surfaces.",
+  "provides": [
+    "window.GameHost.getState"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [],
+  "commands": [],
+  "events": [],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [
+    {
+      "path": "src/host/gameHost.js",
+      "purpose": "debug host state surface"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}

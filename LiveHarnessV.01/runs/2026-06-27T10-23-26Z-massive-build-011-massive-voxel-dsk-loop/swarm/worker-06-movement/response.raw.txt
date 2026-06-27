@@ -1,0 +1,36 @@
+{
+  "worker_id": "worker-06-movement",
+  "slot_id": "movement",
+  "summary": "Define movement state, input intent, movement events, and camera relation.",
+  "provides": [
+    "movement-control-domain-kit"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [
+    "player",
+    "inputIntent",
+    "movementEvents"
+  ],
+  "commands": [
+    "movement.input.request"
+  ],
+  "events": [
+    "movement.input.accepted",
+    "movement.command.rejected"
+  ],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [
+    {
+      "path": "src/domains/movementDomain.js",
+      "purpose": "state-scoped movement"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}
