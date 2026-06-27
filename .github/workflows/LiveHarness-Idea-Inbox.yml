@@ -1,0 +1,82 @@
+name: LiveHarness Idea Inbox
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "Number of variants to generate"
+        required: false
+        default: "10"
+  push:
+    branches:
+      - main
+    paths:
+      - "LiveHarnessV.01/game-ideas/**"
+      - "LiveHarnessV.01/tools/live_harness/idea_injector.py"
+      - "LiveHarnessV.01/tools/live_harness/idea_batch_runner.py"
+      - "LiveHarnessV.01/tools/live_harness/game_spec_harness.py"
+      - "LiveHarnessV.01/tools/live_harness/ten_game_batch_runner.py"
+      - ".github/workflows/LiveHarness-Idea-Inbox.yml"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: kitbuilder03-idea-inbox
+  cancel-in-progress: false
+
+jobs:
+  idea-inbox:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run idea inbox batch
+        shell: bash
+        run: |
+          set -euo pipefail
+          COUNT="${{ github.event.inputs.count }}"
+          if [ -z "$COUNT" ]; then COUNT="10"; fi
+          RUN_ID="$(date -u +%Y-%m-%dT%H-%M-%SZ)-idea-inbox"
+          RUN_DIR="LiveHarnessV.01/runs/$RUN_ID"
+          mkdir -p "$RUN_DIR/logs" "$RUN_DIR/children"
+          set +e
+          (cd LiveHarnessV.01 && PYTHONPATH=tools python -m live_harness.idea_batch_runner --run-id "$RUN_ID" --run-dir "runs/$RUN_ID" --count "$COUNT" --max-workers 16 --max-loops 2 --max-parallel 16) > "$RUN_DIR/logs/idea-inbox.stdout.log" 2> "$RUN_DIR/logs/idea-inbox.stderr.log"
+          EXIT_CODE=$?
+          set -e
+          mkdir -p "$RUN_DIR/status"
+          printf '{"exit_code":%s,"run_id":"%s","count":"%s"}\n' "$EXIT_CODE" "$RUN_ID" "$COUNT" > "$RUN_DIR/status/exit-codes.json"
+          echo "$EXIT_CODE" > LiveHarnessV.01/runs/.idea-inbox-exit
+          exit 0
+      - name: Commit idea inbox artifacts once
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "liveharness-idea-inbox"
+          git config user.email "liveharness-idea-inbox@users.noreply.github.com"
+          git add LiveHarnessV.01/runs/ LiveHarnessV.01/ledgers/ LiveHarnessV.01/state/ docs/ generated/ src/
+          if git diff --cached --quiet; then
+            echo "No final artifacts to commit."
+            exit 0
+          fi
+          git commit -m "chore: record LiveHarness idea inbox batch"
+          git push
+      - uses: actions/configure-pages@v5
+        if: always()
+      - uses: actions/upload-pages-artifact@v3
+        if: always()
+        with:
+          path: docs
+      - uses: actions/deploy-pages@v4
+        if: always()
+        id: deploy
