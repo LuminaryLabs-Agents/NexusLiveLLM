@@ -1,5 +1,16 @@
 [
   {
+    "id": "2026-06-27t10-19-21z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
+    "title": "Massive Voxel DSK Loop Lab",
+    "summary": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+    "prompt": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+    "url": "games/2026-06-27t10-19-21z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/",
+    "score": 100,
+    "status": "active",
+    "visibility": "public",
+    "promoted_at": "2026-06-27T10-19-22Z"
+  },
+  {
     "id": "2026-06-27t10-18-50z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
     "title": "Massive Voxel DSK Loop Lab",
     "summary": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",

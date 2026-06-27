@@ -34,3 +34,8 @@
 {"time": "2026-06-27T10-18-50Z", "event": "repo_usage.checked", "ok": true, "errors": []}
 {"time": "2026-06-27T10-18-51Z", "event": "sandbox.validated", "candidate_id": "2026-06-27t10-18-50z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "ok": true, "failed": []}
 {"time": "2026-06-27T10-18-51Z", "event": "public.validated", "ok": true, "failed": []}
+{"time": "2026-06-27T10-19-21Z", "event": "slots.validated", "ok": true, "valid": 16, "invalid": 0}
+{"time": "2026-06-27T10-19-21Z", "event": "repo_usage.checked", "ok": true, "errors": []}
+{"time": "2026-06-27T10-19-22Z", "event": "sandbox.validated", "candidate_id": "2026-06-27t10-19-21z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "ok": true, "failed": []}
+{"time": "2026-06-27T10-19-22Z", "event": "composition.validated", "candidate_id": "2026-06-27t10-19-21z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk", "ok": true, "failed": []}
+{"time": "2026-06-27T10-19-22Z", "event": "public.validated", "ok": true, "failed": []}

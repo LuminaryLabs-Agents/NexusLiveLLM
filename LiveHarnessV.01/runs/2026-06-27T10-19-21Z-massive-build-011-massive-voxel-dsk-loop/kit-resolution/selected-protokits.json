@@ -1,0 +1,20 @@
+{
+  "schema": "liveharness.selected-protokits.v1",
+  "items": [
+    {
+      "id": "input",
+      "preferred": "protokit.action-input-kit",
+      "fallback": "src/host/inputAdapter.js"
+    },
+    {
+      "id": "world-loader",
+      "preferred": "protokit.world-patch-kit",
+      "fallback": "src/world/worldLoader.js"
+    },
+    {
+      "id": "terrain",
+      "preferred": "protokit.terrain-sampler-kit",
+      "fallback": "src/world/chunkStore.js"
+    }
+  ]
+}

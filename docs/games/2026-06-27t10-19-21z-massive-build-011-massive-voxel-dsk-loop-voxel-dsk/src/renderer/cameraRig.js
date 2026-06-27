@@ -1,0 +1,1 @@
+export function createCameraRig(camera) { return { update(player) { camera.position.set(player.x, player.y, player.z); camera.rotation.order = "YXZ"; camera.rotation.y = player.yaw; camera.rotation.x = player.pitch; } }; }

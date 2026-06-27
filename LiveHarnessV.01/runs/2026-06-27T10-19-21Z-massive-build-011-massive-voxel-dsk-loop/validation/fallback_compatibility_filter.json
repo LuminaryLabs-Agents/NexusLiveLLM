@@ -1,0 +1,16 @@
+{
+  "id": "fallback_compatibility_filter",
+  "ok": true,
+  "summary": "Fallback compatibility passed",
+  "errors": [],
+  "warnings": [],
+  "data": {
+    "fallbacks": {
+      "runtime": "src/runtime/localRuntime.js",
+      "input": "src/host/inputAdapter.js",
+      "world-loader": "src/world/worldLoader.js",
+      "terrain": "src/world/chunkStore.js",
+      "domain-service": "src/domains/buildBreakDomain.js"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "worker_id": "worker-07-build-break-dsk",
+  "slot_id": "build-break-dsk",
+  "summary": "Define build.place.request and block.break.request command/event flow.",
+  "provides": [
+    "build-break-domain-service-kit trace"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [
+    "appliedCommandIds",
+    "domainTrace"
+  ],
+  "commands": [
+    "build.place.request",
+    "block.break.request"
+  ],
+  "events": [
+    "build.block.placed",
+    "build.block.removed",
+    "build.command.rejected"
+  ],
+  "invariants": [
+    "A commandId applies at most once.",
+    "Renderer may request but cannot directly mutate block state."
+  ],
+  "file_plan": [
+    {
+      "path": "src/domains/buildBreakDomain.js",
+      "purpose": "repeat-safe build/break commands"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}

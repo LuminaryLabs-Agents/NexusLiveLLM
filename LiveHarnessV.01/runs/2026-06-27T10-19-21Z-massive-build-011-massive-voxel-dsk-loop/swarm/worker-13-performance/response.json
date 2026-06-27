@@ -1,0 +1,22 @@
+{
+  "worker_id": "worker-13-performance",
+  "slot_id": "performance",
+  "summary": "Define file count, instancing, chunk budget, and draw budget.",
+  "provides": [
+    "performance"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [],
+  "commands": [],
+  "events": [],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [],
+  "risks": [],
+  "fallback_used": true
+}

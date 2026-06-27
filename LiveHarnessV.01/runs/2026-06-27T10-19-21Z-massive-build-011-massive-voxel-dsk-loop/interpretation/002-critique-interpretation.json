@@ -1,0 +1,27 @@
+{
+  "schema": "liveharness.interpretation-critique.v1",
+  "goal_id": "massive-voxel-dsk-loop-lab-acf98e99",
+  "checks": [
+    {
+      "id": "product-plane-separated",
+      "ok": true,
+      "summary": "Public product intent is separated from private harness notes."
+    },
+    {
+      "id": "architecture-contract-present",
+      "ok": true,
+      "summary": "Runtime/Kits/Sequences/Renderer/DSK rules are explicit."
+    },
+    {
+      "id": "anti-drift-present",
+      "ok": true,
+      "summary": "Non-goals block public control-plane metadata and renderer-owned gameplay."
+    },
+    {
+      "id": "gate-policy-present",
+      "ok": true,
+      "summary": "Success gates and loopbacks are defined before output is advanced."
+    }
+  ],
+  "decision": "lock_after_reconcile"
+}
