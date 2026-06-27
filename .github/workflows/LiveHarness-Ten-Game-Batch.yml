@@ -1,0 +1,97 @@
+name: LiveHarness Ten Game Batch
+
+on:
+  workflow_dispatch:
+    inputs:
+      theme_file:
+        description: "Repo-relative theme prompt file"
+        required: false
+        default: "LiveHarnessV.01/game-spec-harness/theme-prompts/001-rpc-voxel-world.md"
+      count:
+        description: "Number of variants to generate"
+        required: false
+        default: "10"
+  push:
+    branches:
+      - main
+    paths:
+      - "LiveHarnessV.01/game-spec-harness/**"
+      - "LiveHarnessV.01/tools/live_harness/game_spec_harness.py"
+      - "LiveHarnessV.01/tools/live_harness/ten_game_batch_runner.py"
+      - ".github/workflows/LiveHarness-Ten-Game-Batch.yml"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: kitbuilder03-ten-game-batch
+  cancel-in-progress: false
+
+env:
+  LIVEHARNESS_MODE: kit-builder
+  LIVEHARNESS_USE_MODEL_SWARM: "false"
+  NVIDIA_MODEL: nvidia/nemotron-3-ultra-550b-a55b
+
+jobs:
+  ten-game-batch:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run ten game batch
+        shell: bash
+        env:
+          THEME_FILE: ${{ github.event.inputs.theme_file }}
+          COUNT_INPUT: ${{ github.event.inputs.count }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+        run: |
+          set -euo pipefail
+          THEME="${THEME_FILE:-LiveHarnessV.01/game-spec-harness/theme-prompts/001-rpc-voxel-world.md}"
+          COUNT="${COUNT_INPUT:-10}"
+          RUN_ID="$(date -u +%Y-%m-%dT%H-%M-%SZ)-ten-game-batch"
+          RUN_DIR="LiveHarnessV.01/runs/$RUN_ID"
+          mkdir -p "$RUN_DIR/logs" "$RUN_DIR/children"
+          set +e
+          (cd LiveHarnessV.01 && PYTHONPATH=tools LIVEHARNESS_MODE="$LIVEHARNESS_MODE" LIVEHARNESS_USE_MODEL_SWARM="$LIVEHARNESS_USE_MODEL_SWARM" NVIDIA_API_KEY="${NVIDIA_API_KEY:-}" NVIDIA_MODEL="$NVIDIA_MODEL" python -m live_harness.ten_game_batch_runner --run-id "$RUN_ID" --run-dir "runs/$RUN_ID" --theme-file "$THEME" --count "$COUNT" --max-workers 16 --max-loops 2 --max-parallel 16) > "$RUN_DIR/logs/ten-game-batch.stdout.log" 2> "$RUN_DIR/logs/ten-game-batch.stderr.log"
+          EXIT_CODE=$?
+          set -e
+          python - <<PY
+          import json, pathlib
+          p = pathlib.Path("$RUN_DIR/status")
+          p.mkdir(parents=True, exist_ok=True)
+          p.joinpath("exit-codes.json").write_text(json.dumps({"exit_code": $EXIT_CODE, "run_id": "$RUN_ID", "theme_file": "$THEME", "count": "$COUNT"}, indent=2) + "\n")
+          PY
+          echo "$EXIT_CODE" > LiveHarnessV.01/runs/.ten-game-batch-exit
+          exit 0
+      - name: Commit batch artifacts once
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "liveharness-ten-game-batch"
+          git config user.email "liveharness-ten-game-batch@users.noreply.github.com"
+          git add LiveHarnessV.01/runs/ LiveHarnessV.01/ledgers/ LiveHarnessV.01/state/ docs/ generated/ src/
+          if git diff --cached --quiet; then
+            echo "No final artifacts to commit."
+            exit 0
+          fi
+          git commit -m "chore: record LiveHarness ten game batch"
+          git push
+      - uses: actions/configure-pages@v5
+        if: always()
+      - uses: actions/upload-pages-artifact@v3
+        if: always()
+        with:
+          path: docs
+      - uses: actions/deploy-pages@v4
+        if: always()
+        id: deploy
