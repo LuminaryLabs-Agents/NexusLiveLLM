@@ -1,0 +1,10 @@
+{
+  "id": "file-size-filter",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "data": {
+    "files": 34,
+    "total_bytes": 32089
+  }
+}

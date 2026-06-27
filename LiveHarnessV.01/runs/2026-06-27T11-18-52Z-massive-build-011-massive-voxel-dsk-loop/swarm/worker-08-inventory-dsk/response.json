@@ -1,0 +1,37 @@
+{
+  "worker_id": "worker-08-inventory-dsk",
+  "slot_id": "inventory-dsk",
+  "summary": "Define block palette, selected block, inventory state, and transaction ledger.",
+  "provides": [
+    "inventory-domain-service-kit state"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [
+    "selectedBlock",
+    "blockCounts",
+    "inventoryLedger"
+  ],
+  "commands": [
+    "inventory.select.request",
+    "inventory.consume.request"
+  ],
+  "events": [
+    "inventory.selected",
+    "inventory.command.rejected"
+  ],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [
+    {
+      "path": "src/domains/inventoryDomain.js",
+      "purpose": "selected block and counts"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}

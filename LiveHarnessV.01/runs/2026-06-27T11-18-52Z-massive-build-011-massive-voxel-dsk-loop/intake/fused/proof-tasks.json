@@ -1,0 +1,50 @@
+{
+  "schema": "liveharness.kit-proof-tasks.v1",
+  "tasks": [
+    {
+      "kit_id": "nexusrealtime.core-runtime",
+      "role": "runtime",
+      "proof_tasks": [
+        "GameHost exposes runtime provider",
+        "fallback exists",
+        "domain services expose command IDs"
+      ]
+    },
+    {
+      "kit_id": "protokit.action-input-kit",
+      "role": "input",
+      "proof_tasks": [
+        "input provider recorded",
+        "input surface exists",
+        "movement input state exists"
+      ]
+    },
+    {
+      "kit_id": "protokit.world-patch-kit",
+      "role": "world-loader",
+      "proof_tasks": [
+        "worldLoader provider recorded",
+        "loaded chunk count exposed",
+        "revision exposed"
+      ]
+    },
+    {
+      "kit_id": "protokit.terrain-sampler-kit",
+      "role": "terrain",
+      "proof_tasks": [
+        "terrain provider recorded",
+        "surfaceY exposed",
+        "biome exposed"
+      ]
+    },
+    {
+      "kit_id": "nexusrealtime.domain-service-kit",
+      "role": "domain-service",
+      "proof_tasks": [
+        "domain provider recorded",
+        "domainTrace exists",
+        "appliedCommandIds exists"
+      ]
+    }
+  ]
+}

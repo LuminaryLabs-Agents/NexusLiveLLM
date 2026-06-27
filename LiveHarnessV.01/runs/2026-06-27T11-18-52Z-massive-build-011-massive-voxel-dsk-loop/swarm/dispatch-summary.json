@@ -1,0 +1,10 @@
+{
+  "schema": "liveharness.swarm-dispatch-summary.v1",
+  "run_dir": "/home/runner/work/NexusRealtime-KitBuilder03/NexusRealtime-KitBuilder03/LiveHarnessV.01/runs/2026-06-27T11-18-52Z-massive-build-011-massive-voxel-dsk-loop",
+  "workers_total": 16,
+  "workers_passed": 16,
+  "fallback_used": 16,
+  "max_parallel": 16,
+  "model_swarm_enabled": false,
+  "completed_at": "2026-06-27T11-18-52Z"
+}

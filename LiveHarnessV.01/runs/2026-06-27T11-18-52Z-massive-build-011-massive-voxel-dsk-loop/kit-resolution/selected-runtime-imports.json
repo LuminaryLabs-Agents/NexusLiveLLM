@@ -1,0 +1,8 @@
+{
+  "schema": "liveharness.selected-runtime-imports.v1",
+  "imports": {
+    "@nexus/core": "approved",
+    "@protokits/action-input": "approved",
+    "three": "approved"
+  }
+}

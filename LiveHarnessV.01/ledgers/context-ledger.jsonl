@@ -71,3 +71,8 @@
 {"time": "2026-06-27T11-18-07Z", "event": "source_intake.completed", "agent_id": "nexusrealtime-protokits", "repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits", "capabilities": 4}
 {"time": "2026-06-27T11-18-07Z", "event": "source_intake.completed", "agent_id": "kitbuilder03-local", "repo": "LuminaryLabs-Agents/NexusRealtime-KitBuilder03", "capabilities": 1}
 {"time": "2026-06-27T11-18-07Z", "event": "intake.fused", "capabilities": 8, "selected": 6}
+{"time": "2026-06-27T11-18-52Z", "event": "source_intake.completed", "agent_id": "nexusrealtime-core", "repo": "LuminaryLabs-Dev/NexusRealtime", "capabilities": 4}
+{"time": "2026-06-27T11-18-52Z", "event": "source_intake.completed", "agent_id": "nexusrealtime-protokits", "repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits", "capabilities": 4}
+{"time": "2026-06-27T11-18-52Z", "event": "source_intake.completed", "agent_id": "kitbuilder03-local", "repo": "LuminaryLabs-Agents/NexusRealtime-KitBuilder03", "capabilities": 1}
+{"time": "2026-06-27T11-18-52Z", "event": "kit_registry.built", "kits": 5}
+{"time": "2026-06-27T11-18-52Z", "event": "intake.fused", "capabilities": 8, "selected": 6, "kits": 5}

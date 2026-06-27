@@ -1,0 +1,16 @@
+{
+  "mode": "kit-builder",
+  "public_title": "Massive Voxel DSK Loop Lab",
+  "public_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+  "public_summary": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+  "product_features": [
+    "Runtime modules for command queue, event bus, and tick clock",
+    "BuildBreakDSK with build.place.request and block.break.request commands",
+    "InventoryDSK with selected block palette state",
+    "MovementControl domain with state-scoped movement intent",
+    "Sequence objective state that guides biome sampling",
+    "Three.js renderer that presents state only",
+    "window.GameHost.getState() exposing player, world, inventory, domainTrace, events, and sequence state",
+    "concise public HUD and controls"
+  ]
+}

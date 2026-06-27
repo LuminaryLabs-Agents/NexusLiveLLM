@@ -1,0 +1,12 @@
+{
+  "worker_id": "worker-07-build-break-dsk",
+  "slot_id": "build-break-dsk",
+  "status": "passed",
+  "elapsed_seconds": 0.0,
+  "output_valid_json": true,
+  "fallback_used": true,
+  "error": "",
+  "completed_at": "2026-06-27T11-18-52Z",
+  "schema_valid": true,
+  "schema_errors": []
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "liveharness.adapter-contracts.v1",
+  "contracts": {
+    "nexusrealtime.core-runtime": {
+      "adapter": "src/integration/nexusRuntimeAdapter.js",
+      "fallback": "src/runtime/localRuntime.js",
+      "expected_inputs": [
+        "kit descriptors",
+        "domain services",
+        "sequence descriptors"
+      ],
+      "expected_outputs": [
+        "runtime surface",
+        "events",
+        "snapshots"
+      ]
+    },
+    "protokit.action-input-kit": {
+      "adapter": "src/integration/adapters/actionInputAdapter.js",
+      "fallback": "src/host/inputAdapter.js",
+      "expected_inputs": [
+        "keydown",
+        "keyup",
+        "pointer"
+      ],
+      "expected_outputs": [
+        "movement.input.request",
+        "inventory.select.request"
+      ]
+    },
+    "protokit.world-patch-kit": {
+      "adapter": "src/integration/adapters/worldPatchAdapter.js",
+      "fallback": "src/world/worldLoader.js",
+      "expected_inputs": [
+        "player position",
+        "view radius"
+      ],
+      "expected_outputs": [
+        "loadedChunks",
+        "recentlyUnloaded",
+        "revision"
+      ]
+    },
+    "protokit.terrain-sampler-kit": {
+      "adapter": "src/integration/adapters/terrainSamplerAdapter.js",
+      "fallback": "src/world/chunkStore.js",
+      "expected_inputs": [
+        "x",
+        "z",
+        "seed"
+      ],
+      "expected_outputs": [
+        "surfaceY",
+        "biome"
+      ]
+    },
+    "nexusrealtime.domain-service-kit": {
+      "adapter": "src/integration/adapters/domainServiceAdapter.js",
+      "fallback": "src/domains/buildBreakDomain.js",
+      "expected_inputs": [
+        "commands",
+        "owned state",
+        "idempotency keys"
+      ],
+      "expected_outputs": [
+        "events",
+        "domainTrace",
+        "appliedCommandIds"
+      ]
+    }
+  }
+}
