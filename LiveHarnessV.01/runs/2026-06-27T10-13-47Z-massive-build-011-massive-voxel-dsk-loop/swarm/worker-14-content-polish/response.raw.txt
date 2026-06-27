@@ -1,0 +1,22 @@
+{
+  "worker_id": "worker-14-content-polish",
+  "slot_id": "content-polish",
+  "summary": "Define names, theme, readable copy, biome and feedback polish.",
+  "provides": [
+    "content-polish"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [],
+  "commands": [],
+  "events": [],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [],
+  "risks": [],
+  "fallback_used": true
+}

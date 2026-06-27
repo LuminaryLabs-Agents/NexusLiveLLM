@@ -1,0 +1,40 @@
+{
+  "worker_id": "worker-03-domain-map",
+  "slot_id": "domain-map",
+  "summary": "Define domain bubbles, commands, events, owned state, invariants, and should-not-own rules.",
+  "provides": [
+    "domain-map",
+    "dsk-boundaries"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [
+    "domainTrace"
+  ],
+  "commands": [
+    "build.place.request",
+    "block.break.request",
+    "movement.input.request",
+    "inventory.select.request"
+  ],
+  "events": [
+    "build.block.placed",
+    "build.block.removed",
+    "movement.input.accepted",
+    "inventory.selected"
+  ],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [
+    {
+      "path": "src/domains/buildBreakDomain.js",
+      "purpose": "DSK command/event membrane"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}

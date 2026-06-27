@@ -1,0 +1,31 @@
+{
+  "schema": "liveharness.source-intake-contract.v1",
+  "agent_id": "kitbuilder03-local",
+  "source": {
+    "type": "github_repo",
+    "repo": "LuminaryLabs-Agents/NexusRealtime-KitBuilder03",
+    "default_branch": "main"
+  },
+  "role": "local_project",
+  "exploration_task": "Map current harness tools, workflows, run artifacts, generated apps, state, memory, and validation filters.",
+  "allowed_uses": [
+    "reference_pattern",
+    "template_seed",
+    "validation_source"
+  ],
+  "blocked_paths": [
+    ".github/",
+    "node_modules/",
+    "dist/",
+    ".env",
+    "credentials"
+  ],
+  "must_answer": [
+    "What can be imported?",
+    "What should only be referenced?",
+    "What should become a validation rule?",
+    "What should not be copied?",
+    "What APIs are stable enough for generated apps?"
+  ],
+  "trusted_as_instruction": false
+}

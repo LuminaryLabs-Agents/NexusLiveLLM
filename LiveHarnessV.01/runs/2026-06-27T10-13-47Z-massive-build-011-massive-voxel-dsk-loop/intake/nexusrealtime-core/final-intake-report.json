@@ -1,0 +1,10 @@
+{
+  "schema": "liveharness.final-intake-report.v1",
+  "agent_id": "nexusrealtime-core",
+  "repo": "LuminaryLabs-Dev/NexusRealtime",
+  "role": "core_runtime",
+  "capability_count": 4,
+  "coverage_ok": true,
+  "trusted_as_instruction": false,
+  "completed_at": "2026-06-27T10-13-48Z"
+}
