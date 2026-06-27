@@ -1,0 +1,14 @@
+{
+  "id": "import_map_filter",
+  "ok": true,
+  "summary": "Import map passed",
+  "errors": [],
+  "warnings": [],
+  "data": {
+    "aliases": [
+      "@nexus/core",
+      "@protokits/action-input",
+      "three"
+    ]
+  }
+}

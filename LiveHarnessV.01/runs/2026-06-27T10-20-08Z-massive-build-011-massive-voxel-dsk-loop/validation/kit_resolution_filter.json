@@ -1,0 +1,10 @@
+{
+  "id": "kit_resolution_filter",
+  "ok": true,
+  "summary": "Kit resolution passed",
+  "errors": [],
+  "warnings": [],
+  "data": {
+    "required_count": 5
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "liveharness.goal-ast.v1",
+  "goal_id": "massive-voxel-dsk-loop-lab-acf98e99",
+  "root": {
+    "id": "goal",
+    "type": "MASTER_GOAL",
+    "text": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops."
+  },
+  "children": [
+    {
+      "id": "product",
+      "type": "PRODUCT_PLANE",
+      "children": [
+        {
+          "id": "user_experience",
+          "type": "USER_EXPERIENCE",
+          "must": [
+            "Runtime modules for command queue, event bus, and tick clock",
+            "BuildBreakDSK with build.place.request and block.break.request commands",
+            "InventoryDSK with selected block palette state",
+            "MovementControl domain with state-scoped movement intent",
+            "Sequence objective state that guides biome sampling",
+            "Three.js renderer that presents state only",
+            "window.GameHost.getState() exposing player, world, inventory, domainTrace, events, and sequence state",
+            "concise public HUD and controls"
+          ]
+        },
+        {
+          "id": "architecture",
+          "type": "NEXUS_ARCHITECTURE",
+          "must": [
+            "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+            "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+            "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+            "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+            "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harness",
+      "type": "HARNESS_PLANE",
+      "children": [
+        {
+          "id": "logs",
+          "type": "OBSERVABILITY",
+          "must": [
+            "write run logs",
+            "write tool results",
+            "write self-alignment turns"
+          ]
+        },
+        {
+          "id": "learning",
+          "type": "FAIL_FORWARD",
+          "must": [
+            "score output",
+            "capsule weak builds",
+            "update capability memory",
+            "keep gallery capped"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anti_goals",
+      "type": "FORBIDDEN_DRIFT",
+      "must_not": [
+        "Do not build a dashboard about model providers or private workflow metadata.",
+        "Do not expose provider, secret, workflow, or prompt-run control-plane data in public app files.",
+        "Do not put all gameplay meaning in renderer, pointer, or keyboard handlers.",
+        "Do not advance a stage only because files exist; advance when alignment and gates pass."
+      ]
+    }
+  ]
+}
