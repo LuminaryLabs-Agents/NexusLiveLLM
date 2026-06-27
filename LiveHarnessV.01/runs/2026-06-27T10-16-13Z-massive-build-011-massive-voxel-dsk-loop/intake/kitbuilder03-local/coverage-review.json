@@ -1,0 +1,15 @@
+{
+  "schema": "liveharness.intake-coverage-review.v1",
+  "agent_id": "kitbuilder03-local",
+  "capsule_count": 1,
+  "answers_required": [
+    "What can be imported?",
+    "What should only be referenced?",
+    "What should become a validation rule?",
+    "What should not be copied?",
+    "What APIs are stable enough for generated apps?"
+  ],
+  "ok": true,
+  "gaps": [],
+  "reviewed_at": "2026-06-27T10-16-13Z"
+}

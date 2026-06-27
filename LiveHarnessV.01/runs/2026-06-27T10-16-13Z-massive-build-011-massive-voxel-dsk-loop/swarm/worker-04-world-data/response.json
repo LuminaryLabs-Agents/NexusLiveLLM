@@ -1,0 +1,36 @@
+{
+  "worker_id": "worker-04-world-data",
+  "slot_id": "world-data",
+  "summary": "Define terrain, chunks, blocks, biomes, and level descriptors.",
+  "provides": [
+    "world.blockStore",
+    "world.terrain"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [
+    "blocks",
+    "heightField",
+    "biomes"
+  ],
+  "commands": [],
+  "events": [],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [
+    {
+      "path": "src/world/blockStore.js",
+      "purpose": "block state store"
+    },
+    {
+      "path": "src/world/terrain.js",
+      "purpose": "deterministic terrain"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}

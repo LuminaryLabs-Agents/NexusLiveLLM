@@ -1,0 +1,7 @@
+{
+  "worker_id": "worker-02-runtime-contract",
+  "ok": true,
+  "notes": [
+    "Result is bounded evidence for reconciliation, not direct repo mutation."
+  ]
+}

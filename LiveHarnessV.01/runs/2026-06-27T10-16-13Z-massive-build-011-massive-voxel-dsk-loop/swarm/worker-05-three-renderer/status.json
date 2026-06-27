@@ -1,0 +1,12 @@
+{
+  "worker_id": "worker-05-three-renderer",
+  "slot_id": "three-renderer",
+  "status": "passed",
+  "elapsed_seconds": 0.0,
+  "output_valid_json": true,
+  "fallback_used": true,
+  "error": "",
+  "completed_at": "2026-06-27T10-16-13Z",
+  "schema_valid": true,
+  "schema_errors": []
+}
