@@ -1,0 +1,10 @@
+{
+  "id": "thin_html_filter",
+  "ok": true,
+  "summary": "Thin HTML shell passed",
+  "errors": [],
+  "warnings": [],
+  "data": {
+    "line_count": 28
+  }
+}

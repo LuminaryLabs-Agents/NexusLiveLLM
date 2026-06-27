@@ -1,0 +1,50 @@
+{
+  "schema": "liveharness.kit-api-summary.v1",
+  "summaries": [
+    {
+      "kit_id": "nexusrealtime.core-runtime",
+      "public_api": [
+        "createRealtimeGame",
+        "defineDomainServiceKit",
+        "validateDomainServiceKit"
+      ],
+      "role": "runtime"
+    },
+    {
+      "kit_id": "protokit.action-input-kit",
+      "public_api": [
+        "semantic input routing",
+        "pressed/released events"
+      ],
+      "role": "input"
+    },
+    {
+      "kit_id": "protokit.world-patch-kit",
+      "public_api": [
+        "patch lifecycle",
+        "active window",
+        "near/far pruning"
+      ],
+      "role": "world-loader"
+    },
+    {
+      "kit_id": "protokit.terrain-sampler-kit",
+      "public_api": [
+        "height sampling",
+        "biome sampling",
+        "terrain descriptors"
+      ],
+      "role": "terrain"
+    },
+    {
+      "kit_id": "nexusrealtime.domain-service-kit",
+      "public_api": [
+        "domain membrane",
+        "validation",
+        "snapshot/reset",
+        "idempotency"
+      ],
+      "role": "domain-service"
+    }
+  ]
+}

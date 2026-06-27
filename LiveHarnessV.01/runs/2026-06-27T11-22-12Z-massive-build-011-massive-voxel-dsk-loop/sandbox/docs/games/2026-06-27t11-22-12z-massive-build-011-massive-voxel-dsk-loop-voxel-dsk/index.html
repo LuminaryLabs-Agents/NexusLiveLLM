@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Massive Voxel DSK Loop Lab</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "@nexus/core": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusRealtime@main/src/index.js",
+      "@protokits/action-input": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Agents/NexusRealtime-ProtoKits@main/protokits/action-input-kit/index.js",
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <main id="app">
+    <canvas id="game"></canvas>
+    <section id="hud"><header id="status" aria-live="polite">Loading kit-composed world…</header></section>
+    <section id="inventory"></section>
+    <section id="inputSurface"></section>
+    <section id="errorPanel" hidden></section>
+  </main>
+  <script type="module" src="./src/boot.js"></script>
+</body>
+</html>

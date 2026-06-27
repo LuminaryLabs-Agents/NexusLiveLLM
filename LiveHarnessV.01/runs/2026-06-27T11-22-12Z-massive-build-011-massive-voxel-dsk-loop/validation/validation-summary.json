@@ -1,0 +1,184 @@
+{
+  "schema": "liveharness.validation-summary.v1",
+  "run_id": "2026-06-27T11-22-12Z-massive-build-011-massive-voxel-dsk-loop",
+  "candidate_id": "2026-06-27t11-22-12z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
+  "ok": true,
+  "passed_filters": [
+    "thin_html_filter",
+    "import_map_filter",
+    "kit_resolution_filter",
+    "fallback_compatibility_filter",
+    "kit_proof_filter",
+    "path-filter",
+    "public-output-membrane",
+    "repo_capability_usage_filter",
+    "file-size-filter",
+    "required-file-filter",
+    "module-graph-filter",
+    "dsk-boundary-filter",
+    "renderer-boundary-filter",
+    "gamehost-filter",
+    "syntax-filter",
+    "ledger-completeness-filter"
+  ],
+  "failed_filters": [],
+  "checks": [
+    {
+      "id": "thin_html_filter",
+      "ok": true,
+      "summary": "Thin HTML shell passed",
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "line_count": 28
+      }
+    },
+    {
+      "id": "import_map_filter",
+      "ok": true,
+      "summary": "Import map passed",
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "aliases": [
+          "@nexus/core",
+          "@protokits/action-input",
+          "three"
+        ]
+      }
+    },
+    {
+      "id": "kit_resolution_filter",
+      "ok": true,
+      "summary": "Kit resolution passed",
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "required_count": 5
+      }
+    },
+    {
+      "id": "fallback_compatibility_filter",
+      "ok": true,
+      "summary": "Fallback compatibility passed",
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "fallbacks": {
+          "runtime": "src/runtime/localRuntime.js",
+          "input": "src/host/inputAdapter.js",
+          "world-loader": "src/world/worldLoader.js",
+          "terrain": "src/world/chunkStore.js",
+          "domain-service": "src/domains/buildBreakDomain.js"
+        }
+      }
+    },
+    {
+      "id": "kit_proof_filter",
+      "ok": true,
+      "summary": "Kit proof passed",
+      "errors": [],
+      "warnings": [
+        "import alias not found in candidate text: @protokits/world-patch",
+        "import alias not found in candidate text: @protokits/terrain-sampler"
+      ],
+      "data": {
+        "kit_count": 5,
+        "proof_task_count": 5,
+        "adapter_count": 4
+      }
+    },
+    {
+      "id": "path-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "public-output-membrane",
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "index.html contains soft term: agent"
+      ],
+      "data": {}
+    },
+    {
+      "id": "repo_capability_usage_filter",
+      "ok": true,
+      "summary": "Repo capability usage passed",
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "imports": [
+          "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusRealtime@main/src/index.js",
+          "https://cdn.jsdelivr.net/gh/LuminaryLabs-Agents/NexusRealtime-ProtoKits@main/protokits/action-input-kit/index.js"
+        ],
+        "integration_plan": "/home/runner/work/NexusRealtime-KitBuilder03/NexusRealtime-KitBuilder03/LiveHarnessV.01/runs/2026-06-27T11-22-12Z-massive-build-011-massive-voxel-dsk-loop/intake/fused/integration-plan.json"
+      }
+    },
+    {
+      "id": "file-size-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "files": 34,
+        "total_bytes": 32166
+      }
+    },
+    {
+      "id": "required-file-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "module-graph-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "dsk-boundary-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "renderer-boundary-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "gamehost-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "syntax-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    },
+    {
+      "id": "ledger-completeness-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    }
+  ],
+  "loopback": null,
+  "repair_prompt": null,
+  "completed_at": "2026-06-27T11-22-14Z"
+}
