@@ -1,0 +1,12 @@
+{
+  "worker_id": "worker-09-sequence-objective",
+  "slot_id": "sequence-objective",
+  "status": "passed",
+  "elapsed_seconds": 0.0,
+  "output_valid_json": true,
+  "fallback_used": true,
+  "error": "",
+  "completed_at": "2026-06-27T10-13-12Z",
+  "schema_valid": true,
+  "schema_errors": []
+}

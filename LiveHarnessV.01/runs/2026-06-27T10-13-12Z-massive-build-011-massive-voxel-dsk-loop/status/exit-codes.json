@@ -1,0 +1,7 @@
+{
+  "build_exit": 0,
+  "single_commit_mode": true,
+  "prompt_file": "LiveHarnessV.01/prompt-inbox/011-massive-voxel-dsk-loop.md",
+  "run_id": "2026-06-27T10-13-12Z-massive-build-011-massive-voxel-dsk-loop",
+  "entrypoint": "massive_build_loop_v3"
+}

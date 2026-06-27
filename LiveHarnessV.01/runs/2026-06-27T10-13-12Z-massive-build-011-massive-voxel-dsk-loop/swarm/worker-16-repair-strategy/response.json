@@ -1,0 +1,22 @@
+{
+  "worker_id": "worker-16-repair-strategy",
+  "slot_id": "repair-strategy",
+  "summary": "Route failures to the right loopback target and repair slot.",
+  "provides": [
+    "repair-strategy"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [],
+  "commands": [],
+  "events": [],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [],
+  "risks": [],
+  "fallback_used": true
+}

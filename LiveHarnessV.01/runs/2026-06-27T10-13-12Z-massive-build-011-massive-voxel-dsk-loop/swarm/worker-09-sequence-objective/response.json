@@ -1,0 +1,34 @@
+{
+  "worker_id": "worker-09-sequence-objective",
+  "slot_id": "sequence-objective",
+  "summary": "Define objective flow, tutorial beats, gates, and progression state.",
+  "provides": [
+    "sequence-objective"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [
+    "currentObjective",
+    "visitedBiomes",
+    "completionState"
+  ],
+  "commands": [],
+  "events": [
+    "sequence.objective.updated",
+    "sequence.completed"
+  ],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [
+    {
+      "path": "src/domains/objectiveSequence.js",
+      "purpose": "authored progression"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}

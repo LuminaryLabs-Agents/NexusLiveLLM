@@ -1,0 +1,106 @@
+{
+  "schema": "liveharness.slot-validation-summary.v1",
+  "workers_total": 16,
+  "workers_valid": 16,
+  "workers_invalid": 0,
+  "results": [
+    {
+      "worker_id": "worker-01-product-brief",
+      "slot_id": "product-brief",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-02-runtime-contract",
+      "slot_id": "runtime-contract",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-03-domain-map",
+      "slot_id": "domain-map",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-04-world-data",
+      "slot_id": "world-data",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-05-three-renderer",
+      "slot_id": "three-renderer",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-06-movement",
+      "slot_id": "movement",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-07-build-break-dsk",
+      "slot_id": "build-break-dsk",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-08-inventory-dsk",
+      "slot_id": "inventory-dsk",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-09-sequence-objective",
+      "slot_id": "sequence-objective",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-10-ui-hud",
+      "slot_id": "ui-hud",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-11-debug-host",
+      "slot_id": "debug-host",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-12-tests",
+      "slot_id": "tests",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-13-performance",
+      "slot_id": "performance",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-14-content-polish",
+      "slot_id": "content-polish",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-15-self-alignment-review",
+      "slot_id": "self-alignment-review",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "worker_id": "worker-16-repair-strategy",
+      "slot_id": "repair-strategy",
+      "ok": true,
+      "errors": []
+    }
+  ],
+  "ok": true,
+  "completed_at": "2026-06-27T10-13-12Z"
+}

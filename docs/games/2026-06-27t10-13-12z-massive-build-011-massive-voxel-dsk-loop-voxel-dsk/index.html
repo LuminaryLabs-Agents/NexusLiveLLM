@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Massive Voxel DSK Loop Lab</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main id="app">
+    <canvas id="game" role="application" aria-label="Infinite voxel domain lab"></canvas>
+    <aside id="hud" aria-label="Game HUD">
+      <header id="status" aria-live="polite">Loading infinite block world...</header>
+      <section id="inventory" aria-label="Inventory"></section>
+      <section id="inputSurface" aria-label="Input test surface"></section>
+      <footer id="controls">WASD move · mouse look · click remove · right-click place · 1-7 select · F toggles fly</footer>
+    </aside>
+    <section id="errorPanel" role="alert" hidden></section>
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

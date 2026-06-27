@@ -1,0 +1,27 @@
+{
+  "worker_id": "worker-05-three-renderer",
+  "slot_id": "three-renderer",
+  "summary": "Define Three.js scene, chunk meshes, materials, camera, and renderer boundary.",
+  "provides": [
+    "renderer.three"
+  ],
+  "requires": [
+    "world.blockStore",
+    "movement.state"
+  ],
+  "owned_state": [],
+  "commands": [],
+  "events": [],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [
+    {
+      "path": "src/renderer/threeRenderer.js",
+      "purpose": "presentation-only renderer"
+    }
+  ],
+  "risks": [],
+  "fallback_used": true
+}
