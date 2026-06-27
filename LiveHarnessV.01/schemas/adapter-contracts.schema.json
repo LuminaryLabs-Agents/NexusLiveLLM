@@ -1,0 +1,9 @@
+{
+  "title": "LiveHarness Adapter Contracts",
+  "type": "object",
+  "required": ["schema", "contracts"],
+  "properties": {
+    "schema": {"type": "string"},
+    "contracts": {"type": "object"}
+  }
+}
