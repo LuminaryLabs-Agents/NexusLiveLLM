@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RPC Voxel World V1</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <main id="app">
+    <canvas id="game" aria-label="RPC voxel world"></canvas>
+    <section id="hud" aria-label="HUD"></section>
+    <section id="inventory" aria-label="Inventory"></section>
+    <section id="rpcPanel" aria-label="RPC trace"></section>
+    <section id="errorPanel" role="alert" hidden></section>
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
