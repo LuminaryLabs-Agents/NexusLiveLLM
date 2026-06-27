@@ -1,0 +1,6 @@
+{
+  "schema": "kitbuilder03.fresh-start.v1",
+  "cleared_at": "2026-06-27T12:00:00Z",
+  "effect": "docs/games.json reset to an empty active manifest; launcher now starts from a clean public list",
+  "note": "Older game folders may remain in docs/games as unlinked historical files, but they are no longer active launcher entries."
+}
