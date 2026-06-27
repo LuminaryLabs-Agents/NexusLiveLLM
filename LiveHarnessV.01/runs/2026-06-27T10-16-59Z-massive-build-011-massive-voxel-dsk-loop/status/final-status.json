@@ -1,0 +1,11 @@
+{
+  "schema": "liveharness.final-status.v1",
+  "run_id": "2026-06-27T10-16-59Z-massive-build-011-massive-voxel-dsk-loop",
+  "status": "success",
+  "single_commit_mode": true,
+  "candidate_id": "2026-06-27t10-16-59z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
+  "public_path": "docs/games/2026-06-27t10-16-59z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk",
+  "validation_ok": true,
+  "loops_attempted": 1,
+  "completed_at": "2026-06-27T10-17-00Z"
+}

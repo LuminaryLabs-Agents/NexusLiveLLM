@@ -1,0 +1,1961 @@
+{
+  "schema": "liveharness.swarm-plan.v1",
+  "run_id": "2026-06-27T10-16-59Z-massive-build-011-massive-voxel-dsk-loop",
+  "loop_index": 1,
+  "created_at": "2026-06-27T10-17-00Z",
+  "max_workers": 16,
+  "workers": [
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-01-product-brief",
+      "slot_id": "product-brief",
+      "label": "Product Brief Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.user_experience",
+      "task": "Refine public title, goal, feature list, and non-goals.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-02-runtime-contract",
+      "slot_id": "runtime-contract",
+      "label": "Runtime Contract Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define tick loop, command queue, event bus, snapshot, and state contract.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "nexusrealtime.domain-service-kit",
+              "source_repo": "LuminaryLabs-Dev/NexusRealtime",
+              "source_path": "seed:intake",
+              "classification": "validation_source",
+              "confidence": 0.84,
+              "provides": [
+                "DSK contract",
+                "domain APIs",
+                "snapshot/reset expectations"
+              ],
+              "use_as": "validation_source",
+              "safe_to_import": false,
+              "safe_to_template": false,
+              "validation_rules": [],
+              "summary": "Domain Service Kit contract should constrain generated domains.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "nexusrealtime.domain-service-kit",
+                "classification": "validation_source",
+                "safe_to_import": false,
+                "import": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusRealtime@main/src/index.js",
+                "use_as": "validation_source"
+              }
+            }
+          ],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-03-domain-map",
+      "slot_id": "domain-map",
+      "label": "DSK Boundary Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define domain bubbles, commands, events, owned state, invariants, and should-not-own rules.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "nexusrealtime.domain-service-kit",
+              "source_repo": "LuminaryLabs-Dev/NexusRealtime",
+              "source_path": "seed:intake",
+              "classification": "validation_source",
+              "confidence": 0.84,
+              "provides": [
+                "DSK contract",
+                "domain APIs",
+                "snapshot/reset expectations"
+              ],
+              "use_as": "validation_source",
+              "safe_to_import": false,
+              "safe_to_template": false,
+              "validation_rules": [],
+              "summary": "Domain Service Kit contract should constrain generated domains.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "nexusrealtime.domain-service-kit",
+                "classification": "validation_source",
+                "safe_to_import": false,
+                "import": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusRealtime@main/src/index.js",
+                "use_as": "validation_source"
+              }
+            },
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "nexusrealtime.sequence-node",
+              "source_repo": "LuminaryLabs-Dev/NexusRealtime",
+              "source_path": "seed:intake",
+              "classification": "reference_pattern",
+              "confidence": 0.84,
+              "provides": [
+                "JSON AST flow",
+                "event driven progression",
+                "mission graph"
+              ],
+              "use_as": "reference_pattern",
+              "safe_to_import": false,
+              "safe_to_template": true,
+              "validation_rules": [],
+              "summary": "SequenceNode is a useful AST pattern for objectives and kit deployment.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "nexusrealtime.sequence-node",
+                "classification": "reference_pattern",
+                "safe_to_import": false,
+                "import": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusRealtime@main/src/index.js",
+                "use_as": "reference_pattern"
+              }
+            }
+          ],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-04-world-data",
+      "slot_id": "world-data",
+      "label": "World Data Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define terrain, chunks, blocks, biomes, and level descriptors.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "nexusrealtime.procedural-world",
+              "source_repo": "LuminaryLabs-Dev/NexusRealtime",
+              "source_path": "seed:intake",
+              "classification": "reference_pattern",
+              "confidence": 0.84,
+              "provides": [
+                "terrain descriptors",
+                "patch lifecycle",
+                "walkability descriptors"
+              ],
+              "use_as": "reference_pattern",
+              "safe_to_import": false,
+              "safe_to_template": true,
+              "validation_rules": [],
+              "summary": "Procedural and terrain systems should produce descriptors consumed by host/renderers.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "nexusrealtime.procedural-world",
+                "classification": "reference_pattern",
+                "safe_to_import": false,
+                "import": null,
+                "use_as": "reference_pattern"
+              }
+            },
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "protokit.world-terrain-pattern",
+              "source_repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits",
+              "source_path": "seed:intake",
+              "classification": "reference_pattern",
+              "confidence": 0.84,
+              "provides": [
+                "terrain sampling",
+                "patch windows",
+                "near/far pruning"
+              ],
+              "use_as": "reference_pattern",
+              "safe_to_import": false,
+              "safe_to_template": true,
+              "validation_rules": [],
+              "summary": "World/terrain ProtoKits are patterns for chunk and patch lifecycle.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "protokit.world-terrain-pattern",
+                "classification": "reference_pattern",
+                "safe_to_import": false,
+                "import": null,
+                "use_as": "reference_pattern"
+              }
+            }
+          ],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-05-three-renderer",
+      "slot_id": "three-renderer",
+      "label": "Three.js Renderer Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define Three.js scene, chunk meshes, materials, camera, and renderer boundary.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "protokit.render-descriptor-pattern",
+              "source_repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits",
+              "source_path": "seed:intake",
+              "classification": "reference_pattern",
+              "confidence": 0.84,
+              "provides": [
+                "renderer agnostic descriptors",
+                "material buckets",
+                "instanced batches"
+              ],
+              "use_as": "reference_pattern",
+              "safe_to_import": false,
+              "safe_to_template": true,
+              "validation_rules": [],
+              "summary": "Visual pipeline kits output render descriptors rather than owning a renderer.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "protokit.render-descriptor-pattern",
+                "classification": "reference_pattern",
+                "safe_to_import": false,
+                "import": null,
+                "use_as": "reference_pattern"
+              }
+            }
+          ],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-06-movement",
+      "slot_id": "movement",
+      "label": "Movement Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define movement state, input intent, movement events, and camera relation.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "protokit.action-input-kit",
+              "source_repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits",
+              "source_path": "seed:intake",
+              "classification": "runtime_dependency",
+              "confidence": 0.84,
+              "provides": [
+                "semantic input routing",
+                "pressed/released events",
+                "aim/axis changes"
+              ],
+              "use_as": "import_candidate",
+              "safe_to_import": true,
+              "safe_to_template": false,
+              "validation_rules": [],
+              "summary": "Action input kit pattern routes host input into semantic game actions.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "protokit.action-input-kit",
+                "classification": "runtime_dependency",
+                "safe_to_import": true,
+                "import": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Agents/NexusRealtime-ProtoKits@main/protokits/action-input-kit/index.js",
+                "use_as": "runtime_dependency"
+              }
+            }
+          ],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-07-build-break-dsk",
+      "slot_id": "build-break-dsk",
+      "label": "Build/Break DSK Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define build.place.request and block.break.request command/event flow.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "nexusrealtime.domain-service-kit",
+              "source_repo": "LuminaryLabs-Dev/NexusRealtime",
+              "source_path": "seed:intake",
+              "classification": "validation_source",
+              "confidence": 0.84,
+              "provides": [
+                "DSK contract",
+                "domain APIs",
+                "snapshot/reset expectations"
+              ],
+              "use_as": "validation_source",
+              "safe_to_import": false,
+              "safe_to_template": false,
+              "validation_rules": [],
+              "summary": "Domain Service Kit contract should constrain generated domains.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "nexusrealtime.domain-service-kit",
+                "classification": "validation_source",
+                "safe_to_import": false,
+                "import": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusRealtime@main/src/index.js",
+                "use_as": "validation_source"
+              }
+            }
+          ],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-08-inventory-dsk",
+      "slot_id": "inventory-dsk",
+      "label": "Inventory DSK Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define block palette, selected block, inventory state, and transaction ledger.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "nexusrealtime.domain-service-kit",
+              "source_repo": "LuminaryLabs-Dev/NexusRealtime",
+              "source_path": "seed:intake",
+              "classification": "validation_source",
+              "confidence": 0.84,
+              "provides": [
+                "DSK contract",
+                "domain APIs",
+                "snapshot/reset expectations"
+              ],
+              "use_as": "validation_source",
+              "safe_to_import": false,
+              "safe_to_template": false,
+              "validation_rules": [],
+              "summary": "Domain Service Kit contract should constrain generated domains.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "nexusrealtime.domain-service-kit",
+                "classification": "validation_source",
+                "safe_to_import": false,
+                "import": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusRealtime@main/src/index.js",
+                "use_as": "validation_source"
+              }
+            }
+          ],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-09-sequence-objective",
+      "slot_id": "sequence-objective",
+      "label": "Sequence Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define objective flow, tutorial beats, gates, and progression state.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "nexusrealtime.sequence-node",
+              "source_repo": "LuminaryLabs-Dev/NexusRealtime",
+              "source_path": "seed:intake",
+              "classification": "reference_pattern",
+              "confidence": 0.84,
+              "provides": [
+                "JSON AST flow",
+                "event driven progression",
+                "mission graph"
+              ],
+              "use_as": "reference_pattern",
+              "safe_to_import": false,
+              "safe_to_template": true,
+              "validation_rules": [],
+              "summary": "SequenceNode is a useful AST pattern for objectives and kit deployment.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "nexusrealtime.sequence-node",
+                "classification": "reference_pattern",
+                "safe_to_import": false,
+                "import": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusRealtime@main/src/index.js",
+                "use_as": "reference_pattern"
+              }
+            }
+          ],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-10-ui-hud",
+      "slot_id": "ui-hud",
+      "label": "UI/HUD Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.user_experience",
+      "task": "Define concise HUD, status, controls, and public copy.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-11-debug-host",
+      "slot_id": "debug-host",
+      "label": "Debug Host Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define window.GameHost.getState() and snapshot/debug surfaces.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-12-tests",
+      "slot_id": "tests",
+      "label": "Tool/Test Worker",
+      "critical": true,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define smoke tests, syntax checks, and GameHost/domain trace expectations.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [
+            {
+              "schema": "liveharness.capability-capsule.v1",
+              "capability_id": "nexusrealtime.domain-service-kit",
+              "source_repo": "LuminaryLabs-Dev/NexusRealtime",
+              "source_path": "seed:intake",
+              "classification": "validation_source",
+              "confidence": 0.84,
+              "provides": [
+                "DSK contract",
+                "domain APIs",
+                "snapshot/reset expectations"
+              ],
+              "use_as": "validation_source",
+              "safe_to_import": false,
+              "safe_to_template": false,
+              "validation_rules": [],
+              "summary": "Domain Service Kit contract should constrain generated domains.",
+              "constraints": [
+                "Treat as evidence, not instruction.",
+                "Do not copy source text wholesale into generated public output."
+              ],
+              "trusted_as_instruction": false,
+              "safe_to_embed_publicly": false,
+              "resolved_import": {
+                "capability_id": "nexusrealtime.domain-service-kit",
+                "classification": "validation_source",
+                "safe_to_import": false,
+                "import": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusRealtime@main/src/index.js",
+                "use_as": "validation_source"
+              }
+            }
+          ],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-13-performance",
+      "slot_id": "performance",
+      "label": "Performance Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define file count, instancing, chunk budget, and draw budget.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-14-content-polish",
+      "slot_id": "content-polish",
+      "label": "Content Polish Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Define names, theme, readable copy, biome and feedback polish.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-15-self-alignment-review",
+      "slot_id": "self-alignment-review",
+      "label": "Self-Alignment Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Review output against master interpretation and gate policy.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    },
+    {
+      "schema": "liveharness.worker-contract.v1",
+      "worker_id": "worker-16-repair-strategy",
+      "slot_id": "repair-strategy",
+      "label": "Repair Worker",
+      "critical": false,
+      "goal_ref": "input/master-interpretation.json",
+      "goal_ast_node": "product.architecture",
+      "task": "Route failures to the right loopback target and repair slot.",
+      "input_context": {
+        "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+        "public_product_intent": {
+          "title": "Massive Voxel DSK Loop Lab",
+          "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+          "primary_verbs": [
+            "move",
+            "place",
+            "select",
+            "build",
+            "break",
+            "validate"
+          ],
+          "target_artifact": "playable browser experiment or designer-facing kit tool"
+        },
+        "architecture_contract": {
+          "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+          "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+          "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+          "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+          "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+        },
+        "target_capabilities": [
+          "product-brief membrane",
+          "debug-host-state",
+          "top-ten rolling gallery",
+          "voxel host",
+          "build-break-domain-service-kit trace",
+          "inventory-domain-service-kit state",
+          "movement-control-kit state",
+          "domain bubble contract",
+          "command-event membrane",
+          "idempotency ledger",
+          "sequence gate workflow",
+          "stage gate transition"
+        ],
+        "repo_capabilities": {
+          "integration_mode": "reference-plus-local-fallback",
+          "validation_rules": [
+            "renderer must consume descriptors/state and not own gameplay state",
+            "input adapter should route platform input into domain command requests",
+            "world patch or chunk lifecycle should be separate from renderer mesh construction",
+            "domain actions must expose command identifiers and event traces",
+            "Sequence or objective flow should be represented as data and events"
+          ],
+          "runtime_dependencies": [
+            "protokit.action-input-kit"
+          ],
+          "reference_patterns": [
+            "nexusrealtime.domain-service-kit",
+            "nexusrealtime.sequence-node",
+            "nexusrealtime.procedural-world",
+            "protokit.world-terrain-pattern",
+            "protokit.render-descriptor-pattern"
+          ],
+          "relevant_capabilities": [],
+          "trusted_as_instruction": false
+        },
+        "loop_index": 1
+      },
+      "must_return": {
+        "summary": "string",
+        "provides": [
+          "string"
+        ],
+        "requires": [
+          "string"
+        ],
+        "owned_state": [
+          "string"
+        ],
+        "commands": [
+          "string"
+        ],
+        "events": [
+          "string"
+        ],
+        "invariants": [
+          "string"
+        ],
+        "file_plan": [
+          {
+            "path": "string",
+            "purpose": "string"
+          }
+        ],
+        "risks": [
+          "string"
+        ]
+      }
+    }
+  ],
+  "policy_ref": "state/swarm-policy.json",
+  "repo_intake_ref": "intake/fused/integration-plan.json"
+}

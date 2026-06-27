@@ -1,0 +1,12 @@
+{
+  "worker_id": "worker-15-self-alignment-review",
+  "slot_id": "self-alignment-review",
+  "status": "passed",
+  "elapsed_seconds": 0.0,
+  "output_valid_json": true,
+  "fallback_used": true,
+  "error": "",
+  "completed_at": "2026-06-27T10-17-00Z",
+  "schema_valid": true,
+  "schema_errors": []
+}

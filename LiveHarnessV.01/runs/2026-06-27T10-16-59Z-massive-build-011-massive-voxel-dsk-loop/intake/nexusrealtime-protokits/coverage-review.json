@@ -1,0 +1,15 @@
+{
+  "schema": "liveharness.intake-coverage-review.v1",
+  "agent_id": "nexusrealtime-protokits",
+  "capsule_count": 4,
+  "answers_required": [
+    "What can be imported?",
+    "What should only be referenced?",
+    "What should become a validation rule?",
+    "What should not be copied?",
+    "What APIs are stable enough for generated apps?"
+  ],
+  "ok": true,
+  "gaps": [],
+  "reviewed_at": "2026-06-27T10-17-00Z"
+}
