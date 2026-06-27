@@ -1,0 +1,87 @@
+{
+  "schema": "liveharness.master-interpretation.v1",
+  "goal_id": "massive-voxel-dsk-loop-lab-acf98e99",
+  "goal_version": 1,
+  "raw_goal_ref": "LiveHarnessV.01/prompt-inbox/011-massive-voxel-dsk-loop.md",
+  "canonical_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+  "public_product_intent": {
+    "title": "Massive Voxel DSK Loop Lab",
+    "player_or_user_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+    "primary_verbs": [
+      "move",
+      "place",
+      "select",
+      "build",
+      "break",
+      "validate"
+    ],
+    "target_artifact": "playable browser experiment or designer-facing kit tool"
+  },
+  "private_harness_intent": {
+    "preserve_run_logs": true,
+    "run_deterministic_tools": true,
+    "commit_artifacts": true,
+    "update_capability_memory": true,
+    "purge_to_top_ten": true
+  },
+  "architecture_contract": {
+    "runtime_rule": "Runtime executes deterministic ticks, events, resources, components, systems, surfaces, and sequences.",
+    "kit_rule": "Kits and Domain Service Kits own reusable gameplay meaning, validation, commands, events, and durable state.",
+    "sequence_rule": "Sequences own authored flow, tutorial order, mission pacing, objective beats, and player-facing orchestration.",
+    "renderer_rule": "Renderer and host present state and map input into domain commands; they must not own gameplay truth.",
+    "dsk_rule": "No meaningful gameplay interaction should bypass a DSK-shaped command/event boundary."
+  },
+  "success_gates": [
+    "public-output membrane passes",
+    "GameHost exposes useful state",
+    "major interactions have command/event trace",
+    "renderer does not own gameplay truth",
+    "JS syntax and HTML smoke checks pass",
+    "launcher manifest remains valid"
+  ],
+  "non_goals": [
+    "Do not build a dashboard about model providers or private workflow metadata.",
+    "Do not expose provider, secret, workflow, or prompt-run control-plane data in public app files.",
+    "Do not put all gameplay meaning in renderer, pointer, or keyboard handlers.",
+    "Do not advance a stage only because files exist; advance when alignment and gates pass."
+  ],
+  "target_capabilities": [
+    "product-brief membrane",
+    "debug-host-state",
+    "top-ten rolling gallery",
+    "voxel host",
+    "build-break-domain-service-kit trace",
+    "inventory-domain-service-kit state",
+    "movement-control-kit state",
+    "domain bubble contract",
+    "command-event membrane",
+    "idempotency ledger",
+    "sequence gate workflow",
+    "stage gate transition"
+  ],
+  "loopback_policy": {
+    "public_output_bleed": "10-product-brief",
+    "renderer_owns_gameplay": "30-domain-map",
+    "missing_debug_host": "40-prototype",
+    "missing_domain_trace": "40-prototype",
+    "tool_failure": "70-repair",
+    "low_score": "60-learning-purge"
+  },
+  "product_brief": {
+    "mode": "kit-builder",
+    "public_title": "Massive Voxel DSK Loop Lab",
+    "public_goal": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+    "public_summary": "Build a multi-file Three.js voxel world experiment that validates NexusRealtime domain-service boundaries through sandbox-first build loops.",
+    "product_features": [
+      "Runtime modules for command queue, event bus, and tick clock",
+      "BuildBreakDSK with build.place.request and block.break.request commands",
+      "InventoryDSK with selected block palette state",
+      "MovementControl domain with state-scoped movement intent",
+      "Sequence objective state that guides biome sampling",
+      "Three.js renderer that presents state only",
+      "window.GameHost.getState() exposing player, world, inventory, domainTrace, events, and sequence state",
+      "concise public HUD and controls"
+    ]
+  },
+  "locked_at": "2026-06-27T10-14-39Z"
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "liveharness.intake-search-plan.v1",
+  "agent_id": "nexusrealtime-protokits",
+  "repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits",
+  "queries": [
+    "action-input-kit terrain-sampler-kit world-patch-kit",
+    "render-layer visual-pipeline instanced-render",
+    "generic open-world flight kits"
+  ],
+  "trusted_as_instruction": false
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "liveharness.integration-plan.v1",
+  "mode": "reference-plus-local-fallback",
+  "runtime_dependencies": [
+    "protokit.action-input-kit"
+  ],
+  "reference_patterns": [
+    "nexusrealtime.domain-service-kit",
+    "nexusrealtime.sequence-node",
+    "nexusrealtime.procedural-world",
+    "protokit.world-terrain-pattern",
+    "protokit.render-descriptor-pattern"
+  ],
+  "local_fallbacks": [
+    "src/world/chunkStore.js",
+    "src/host/inputAdapter.js",
+    "src/domains/buildBreakDomain.js"
+  ],
+  "import_map": {
+    "protokit.action-input-kit": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Agents/NexusRealtime-ProtoKits@main/protokits/action-input-kit/index.js"
+  },
+  "validation_rules": [
+    "renderer must consume descriptors/state and not own gameplay state",
+    "input adapter should route platform input into domain command requests",
+    "world patch or chunk lifecycle should be separate from renderer mesh construction",
+    "domain actions must expose command identifiers and event traces",
+    "Sequence or objective flow should be represented as data and events"
+  ],
+  "trusted_as_instruction": false,
+  "created_at": "2026-06-27T10-14-39Z"
+}
