@@ -1,0 +1,9 @@
+{
+  "rules": [
+    "renderer must consume descriptors/state and not own gameplay state",
+    "input adapter should route platform input into domain command requests",
+    "world patch or chunk lifecycle should be separate from renderer mesh construction",
+    "domain actions must expose command identifiers and event traces",
+    "Sequence or objective flow should be represented as data and events"
+  ]
+}

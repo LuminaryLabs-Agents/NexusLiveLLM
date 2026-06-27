@@ -1,0 +1,22 @@
+{
+  "worker_id": "worker-15-self-alignment-review",
+  "slot_id": "self-alignment-review",
+  "summary": "Review output against master interpretation and gate policy.",
+  "provides": [
+    "self-alignment-review"
+  ],
+  "requires": [
+    "master-interpretation",
+    "goal-ast"
+  ],
+  "owned_state": [],
+  "commands": [],
+  "events": [],
+  "invariants": [
+    "Respect public-output membrane.",
+    "Renderer presents state and does not own gameplay truth."
+  ],
+  "file_plan": [],
+  "risks": [],
+  "fallback_used": true
+}

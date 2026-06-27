@@ -1,0 +1,143 @@
+{
+  "schema": "liveharness.kit-registry.v1",
+  "kits": [
+    {
+      "kit_id": "nexusrealtime.core-runtime",
+      "source": "NexusRealtime",
+      "role": "runtime",
+      "import_alias": "@nexus/core",
+      "public_api": [
+        "createRealtimeGame",
+        "defineDomainServiceKit",
+        "validateDomainServiceKit"
+      ],
+      "expected_inputs": [
+        "kit descriptors",
+        "domain services",
+        "sequence descriptors"
+      ],
+      "expected_outputs": [
+        "runtime surface",
+        "events",
+        "snapshots"
+      ],
+      "adapter": "src/integration/nexusRuntimeAdapter.js",
+      "fallback": "src/runtime/localRuntime.js",
+      "proof_tasks": [
+        "GameHost exposes runtime provider",
+        "fallback exists",
+        "domain services expose command IDs"
+      ]
+    },
+    {
+      "kit_id": "protokit.action-input-kit",
+      "source": "NexusRealtime-ProtoKits",
+      "role": "input",
+      "import_alias": "@protokits/action-input",
+      "public_api": [
+        "semantic input routing",
+        "pressed/released events"
+      ],
+      "expected_inputs": [
+        "keydown",
+        "keyup",
+        "pointer"
+      ],
+      "expected_outputs": [
+        "movement.input.request",
+        "inventory.select.request"
+      ],
+      "adapter": "src/integration/adapters/actionInputAdapter.js",
+      "fallback": "src/host/inputAdapter.js",
+      "proof_tasks": [
+        "input provider recorded",
+        "input surface exists",
+        "movement input state exists"
+      ]
+    },
+    {
+      "kit_id": "protokit.world-patch-kit",
+      "source": "NexusRealtime-ProtoKits",
+      "role": "world-loader",
+      "import_alias": "@protokits/world-patch",
+      "public_api": [
+        "patch lifecycle",
+        "active window",
+        "near/far pruning"
+      ],
+      "expected_inputs": [
+        "player position",
+        "view radius"
+      ],
+      "expected_outputs": [
+        "loadedChunks",
+        "recentlyUnloaded",
+        "revision"
+      ],
+      "adapter": "src/integration/adapters/worldPatchAdapter.js",
+      "fallback": "src/world/worldLoader.js",
+      "proof_tasks": [
+        "worldLoader provider recorded",
+        "loaded chunk count exposed",
+        "revision exposed"
+      ]
+    },
+    {
+      "kit_id": "protokit.terrain-sampler-kit",
+      "source": "NexusRealtime-ProtoKits",
+      "role": "terrain",
+      "import_alias": "@protokits/terrain-sampler",
+      "public_api": [
+        "height sampling",
+        "biome sampling",
+        "terrain descriptors"
+      ],
+      "expected_inputs": [
+        "x",
+        "z",
+        "seed"
+      ],
+      "expected_outputs": [
+        "surfaceY",
+        "biome"
+      ],
+      "adapter": "src/integration/adapters/terrainSamplerAdapter.js",
+      "fallback": "src/world/chunkStore.js",
+      "proof_tasks": [
+        "terrain provider recorded",
+        "surfaceY exposed",
+        "biome exposed"
+      ]
+    },
+    {
+      "kit_id": "nexusrealtime.domain-service-kit",
+      "source": "NexusRealtime",
+      "role": "domain-service",
+      "import_alias": "@nexus/core",
+      "public_api": [
+        "domain membrane",
+        "validation",
+        "snapshot/reset",
+        "idempotency"
+      ],
+      "expected_inputs": [
+        "commands",
+        "owned state",
+        "idempotency keys"
+      ],
+      "expected_outputs": [
+        "events",
+        "domainTrace",
+        "appliedCommandIds"
+      ],
+      "adapter": "src/integration/adapters/domainServiceAdapter.js",
+      "fallback": "src/domains/buildBreakDomain.js",
+      "proof_tasks": [
+        "domain provider recorded",
+        "domainTrace exists",
+        "appliedCommandIds exists"
+      ]
+    }
+  ],
+  "created_at": "2026-06-27T23-46-03Z"
+}

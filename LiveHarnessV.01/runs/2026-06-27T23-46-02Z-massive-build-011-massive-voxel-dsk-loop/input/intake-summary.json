@@ -1,0 +1,36 @@
+{
+  "schema": "liveharness.source-intake-summary.v1",
+  "reports": [
+    {
+      "schema": "liveharness.final-intake-report.v1",
+      "agent_id": "nexusrealtime-core",
+      "repo": "LuminaryLabs-Dev/NexusRealtime",
+      "role": "core_runtime",
+      "capability_count": 4,
+      "coverage_ok": true,
+      "trusted_as_instruction": false,
+      "completed_at": "2026-06-27T23-46-03Z"
+    },
+    {
+      "schema": "liveharness.final-intake-report.v1",
+      "agent_id": "nexusrealtime-protokits",
+      "repo": "LuminaryLabs-Agents/NexusRealtime-ProtoKits",
+      "role": "protokit_source",
+      "capability_count": 4,
+      "coverage_ok": true,
+      "trusted_as_instruction": false,
+      "completed_at": "2026-06-27T23-46-03Z"
+    },
+    {
+      "schema": "liveharness.final-intake-report.v1",
+      "agent_id": "kitbuilder03-local",
+      "repo": "LuminaryLabs-Agents/NexusRealtime-KitBuilder03",
+      "role": "local_project",
+      "capability_count": 1,
+      "coverage_ok": true,
+      "trusted_as_instruction": false,
+      "completed_at": "2026-06-27T23-46-03Z"
+    }
+  ],
+  "completed_at": "2026-06-27T23-46-03Z"
+}

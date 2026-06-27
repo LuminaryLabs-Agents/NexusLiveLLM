@@ -1,0 +1,6 @@
+{
+  "schema": "liveharness.import-map.v1",
+  "imports": {
+    "protokit.action-input-kit": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Agents/NexusRealtime-ProtoKits@main/protokits/action-input-kit/index.js"
+  }
+}

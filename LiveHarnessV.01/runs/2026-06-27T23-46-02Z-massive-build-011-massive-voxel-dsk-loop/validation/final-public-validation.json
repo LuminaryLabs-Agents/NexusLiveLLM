@@ -1,0 +1,64 @@
+{
+  "schema": "liveharness.final-public-validation.v1",
+  "run_id": "2026-06-27T23-46-02Z-massive-build-011-massive-voxel-dsk-loop",
+  "ok": true,
+  "checks": [
+    {
+      "id": "public_output_membrane_check",
+      "ok": true,
+      "summary": "No hard control-plane terms found in active public docs output",
+      "errors": [],
+      "warnings": [
+        "docs/games/2026-06-27t23-46-02z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/index.html: soft term agent",
+        "docs/games/2026-06-27t23-45-30z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/index.html: soft term agent",
+        "docs/games/2026-06-27t23-44-45z-massive-build-011-massive-voxel-dsk-loop-voxel-dsk/index.html: soft term agent"
+      ],
+      "data": {
+        "files_scanned": 103
+      }
+    },
+    {
+      "id": "domain_trace_check",
+      "ok": true,
+      "summary": "Domain trace contract present",
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "required": [
+          "build.place.request",
+          "block.break.request",
+          "commandId",
+          "domainTrace",
+          "appliedCommandIds"
+        ]
+      }
+    },
+    {
+      "id": "gamehost_check",
+      "ok": true,
+      "summary": "GameHost contract present",
+      "errors": [],
+      "warnings": [],
+      "data": {
+        "required": [
+          "window.GameHost",
+          "getState",
+          "movement",
+          "inventory",
+          "buildBreak",
+          "domainTrace",
+          "sequence"
+        ]
+      }
+    },
+    {
+      "id": "legacy-builder-output-filter",
+      "ok": true,
+      "errors": [],
+      "warnings": [],
+      "data": {}
+    }
+  ],
+  "failed": [],
+  "completed_at": "2026-06-27T23-46-04Z"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "kit_proof_filter",
+  "ok": true,
+  "summary": "Kit proof passed",
+  "errors": [],
+  "warnings": [
+    "import alias not found in candidate text: @protokits/world-patch",
+    "import alias not found in candidate text: @protokits/terrain-sampler"
+  ],
+  "data": {
+    "kit_count": 5,
+    "proof_task_count": 5,
+    "adapter_count": 4
+  }
+}
