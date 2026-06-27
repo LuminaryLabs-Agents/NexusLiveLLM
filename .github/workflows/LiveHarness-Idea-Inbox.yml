@@ -7,11 +7,17 @@ on:
         description: "Number of variants to generate"
         required: false
         default: "10"
+      power:
+        description: "Build power profile: low, standard, high, deep, or extreme"
+        required: false
+        default: "standard"
   push:
     branches:
       - main
     paths:
       - "LiveHarnessV.01/game-ideas/**"
+      - "LiveHarnessV.01/state/power-profiles.json"
+      - "LiveHarnessV.01/tools/live_harness/build_power.py"
       - "LiveHarnessV.01/tools/live_harness/idea_injector.py"
       - "LiveHarnessV.01/tools/live_harness/idea_batch_runner.py"
       - "LiveHarnessV.01/tools/live_harness/game_spec_harness.py"
@@ -46,16 +52,18 @@ jobs:
         run: |
           set -euo pipefail
           COUNT="${{ github.event.inputs.count }}"
+          POWER="${{ github.event.inputs.power }}"
           if [ -z "$COUNT" ]; then COUNT="10"; fi
+          if [ -z "$POWER" ]; then POWER="standard"; fi
           RUN_ID="$(date -u +%Y-%m-%dT%H-%M-%SZ)-idea-inbox"
           RUN_DIR="LiveHarnessV.01/runs/$RUN_ID"
           mkdir -p "$RUN_DIR/logs" "$RUN_DIR/children"
           set +e
-          (cd LiveHarnessV.01 && PYTHONPATH=tools python -m live_harness.idea_batch_runner --run-id "$RUN_ID" --run-dir "runs/$RUN_ID" --count "$COUNT" --max-workers 16 --max-loops 2 --max-parallel 16) > "$RUN_DIR/logs/idea-inbox.stdout.log" 2> "$RUN_DIR/logs/idea-inbox.stderr.log"
+          (cd LiveHarnessV.01 && PYTHONPATH=tools LIVEHARNESS_POWER="$POWER" python -m live_harness.idea_batch_runner --run-id "$RUN_ID" --run-dir "runs/$RUN_ID" --count "$COUNT" --power "$POWER") > "$RUN_DIR/logs/idea-inbox.stdout.log" 2> "$RUN_DIR/logs/idea-inbox.stderr.log"
           EXIT_CODE=$?
           set -e
           mkdir -p "$RUN_DIR/status"
-          printf '{"exit_code":%s,"run_id":"%s","count":"%s"}\n' "$EXIT_CODE" "$RUN_ID" "$COUNT" > "$RUN_DIR/status/exit-codes.json"
+          printf '{"exit_code":%s,"run_id":"%s","count":"%s","power":"%s"}\n' "$EXIT_CODE" "$RUN_ID" "$COUNT" "$POWER" > "$RUN_DIR/status/exit-codes.json"
           echo "$EXIT_CODE" > LiveHarnessV.01/runs/.idea-inbox-exit
           exit 0
       - name: Commit idea inbox artifacts once
